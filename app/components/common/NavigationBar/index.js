@@ -30,7 +30,10 @@ function NavigationBar() {
           </NavItem>
         </Nav>
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">
+          <NavItem eventKey={1} href="/login">
+            <FormattedMessage {...messages.login} />
+          </NavItem>
+          <NavItem eventKey={2} href="#">
             <FormattedMessage {...messages.profile} />
           </NavItem>
         </Nav>

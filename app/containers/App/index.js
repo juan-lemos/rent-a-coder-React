@@ -23,15 +23,13 @@ import NavigationBar from 'components/common/NavigationBar';
 export default function App() {
   return (
     <div>
-      <Switch>
-        <Route path="/" component={NavigationBar} />
-      </Switch>
+      <NavigationBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/login" component={LoginPage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </div >
   );
 }

@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { Button, Form, FormGroup, Col, FormControl, Well } from 'react-bootstrap';
+import LoginForm from 'components/LoginForm';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectLoginPage from './selectors';
@@ -20,39 +20,16 @@ import saga from './saga';
 // import messages from './messages';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  ControlLabel = 'hola';
   render() {
     return (
       <div style={{ maxWidth: '300', margin: 'auto' }}>
-        <Well>
-          <Form horizontal>
-            <FormGroup controlId="formHorizontalEmail">
-              <Col componentClass={this.ControlLabel} sm={12}>
-                Email
-            </Col>
-              <Col sm={12}>
-                <FormControl type="email" placeholder="Email" />
-              </Col>
-            </FormGroup>
-
-            <FormGroup controlId="formHorizontalPassword">
-              <Col componentClass={this.ControlLabel} sm={12}>
-                Password
-          </Col>
-              <Col sm={12}>
-                <FormControl type="password" placeholder="Password" />
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col sm={12}>
-                <Button type="submit" >
-                  {'Sign in'}
-                </Button>
-              </Col>
-            </FormGroup>
-          </Form>
-        </Well>
+        <LoginForm
+          logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
+          errorInLogin
+          handleEmailFieldChange={() => (console.log())}
+          handlePasswordFieldChange={() => (console.log())}
+          handleSignInClick={() => (console.log())}
+        />
       </div>
     );
   }

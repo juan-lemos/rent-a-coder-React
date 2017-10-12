@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import { Button, Form, FormGroup, Col, FormControl, Checkbox } from 'react-bootstrap';
+import { Button, Form, FormGroup, Col, FormControl, Well } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectLoginPage from './selectors';
@@ -23,40 +23,36 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   ControlLabel = 'hola';
   render() {
     return (
-      <div>
-        <Form horizontal>
-          <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={this.ControlLabel} sm={2}>
-              Email
+      <div style={{ maxWidth: '300', margin: 'auto' }}>
+        <Well>
+          <Form horizontal>
+            <FormGroup controlId="formHorizontalEmail">
+              <Col componentClass={this.ControlLabel} sm={12}>
+                Email
+            </Col>
+              <Col sm={12}>
+                <FormControl type="email" placeholder="Email" />
+              </Col>
+            </FormGroup>
+
+            <FormGroup controlId="formHorizontalPassword">
+              <Col componentClass={this.ControlLabel} sm={12}>
+                Password
           </Col>
-            <Col sm={10}>
-              <FormControl type="email" placeholder="Email" />
-            </Col>
-          </FormGroup>
+              <Col sm={12}>
+                <FormControl type="password" placeholder="Password" />
+              </Col>
+            </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={this.ControlLabel} sm={2}>
-              Password
-          </Col>
-            <Col sm={10}>
-              <FormControl type="password" placeholder="Password" />
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Checkbox>Remember me</Checkbox>
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col smOffset={2} sm={10}>
-              <Button type="submit">
-                Sign in
-            </Button>
-            </Col>
-          </FormGroup>
-        </Form>
+            <FormGroup>
+              <Col sm={12}>
+                <Button type="submit" >
+                  {'Sign in'}
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </Well>
       </div>
     );
   }

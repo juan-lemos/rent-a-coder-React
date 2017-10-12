@@ -17,6 +17,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   render() {
     return (
       <div>
+        <span>home</span>
       </div>
     );
   }

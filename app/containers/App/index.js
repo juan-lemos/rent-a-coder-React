@@ -23,7 +23,9 @@ import NavigationBar from 'components/common/NavigationBar';
 export default function App() {
   return (
     <div>
-      <NavigationBar />
+      <Switch>
+        <Route path="/" component={NavigationBar} />
+      </Switch>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />

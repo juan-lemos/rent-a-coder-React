@@ -19,6 +19,7 @@ import ProfilePage from 'containers/ProfilePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationBar from 'components/common/NavigationBar';
+import RegisterPage from 'containers/RegisterPage/Loadable';
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div >

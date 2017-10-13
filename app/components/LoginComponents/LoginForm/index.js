@@ -4,7 +4,8 @@
 *
 */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 import { Button, Form, FormGroup, Col, FormControl, Well, HelpBlock } from 'react-bootstrap';
@@ -28,20 +29,21 @@ function LoginForm({
 
       <Well>
         <Form horizontal>
-          <FormGroup controlId="formHorizontalEmail">
+          <FormGroup>
             <Col sm={12}>
               <FormattedMessage {...messages.email} />
             </Col>
             <Col sm={12}>
               <FormControl
                 onChange={handleEmailFieldChange}
-                type="email"
-                placeholder={intl.formatMessage(messages.email)}
+                type="input"
+                placeholder={intl.formatMessage(messages.email)
+                }
               />
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalPassword">
+          <FormGroup>
             <Col sm={12}>
               <FormattedMessage {...messages.password} />
             </Col>
@@ -56,7 +58,7 @@ function LoginForm({
 
           <FormGroup>
             <Col sm={12}>
-              <Button type="submit" onClick={handleSignInClick()}>
+              <Button type="submit" onClick={handleSignInClick}>
                 <FormattedMessage {...messages.singin} />
               </Button>
             </Col>

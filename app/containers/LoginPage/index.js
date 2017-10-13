@@ -20,15 +20,25 @@ import saga from './saga';
 // import messages from './messages';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      errorInLogin: false,
+    };
+  }
+
+
   render() {
     return (
-      <div style={{ maxWidth: '300', margin: 'auto' }}>
+      <div style={{ maxWidth: '300px', margin: 'auto' }}>
         <LoginForm
           logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-          errorInLogin
-          handleEmailFieldChange={() => (console.log())}
-          handlePasswordFieldChange={() => (console.log())}
-          handleSignInClick={() => (console.log())}
+          errorInLogin={this.state.errorInLogin}
+          handleEmailFieldChange={(event) => (this.setState({ email: event.target.value }))}
+          handlePasswordFieldChange={(event) => (this.setState({ password: event.target.value }))}
+          handleSignInClick={() => (console.log(this.state.email))}
         />
       </div>
     );

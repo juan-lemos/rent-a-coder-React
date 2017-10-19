@@ -129,7 +129,7 @@ function RegisterForm() {
           <FormGroup>
             <Col sm={12}>
               <Button type="submit">
-                <FormattedMessage {...messages.singin} />
+                <FormattedMessage {...messages.create} />
               </Button>
             </Col>
           </FormGroup>

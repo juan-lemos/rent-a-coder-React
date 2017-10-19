@@ -8,9 +8,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import Form from 'components/RegisterComponents/RegisterForm';
 import injectSaga from 'utils/injectSaga';
@@ -18,12 +18,16 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
+
+
+const RegisterContainer = styled.div`
+  max-width : 500px;
+  margin : auto;
+`;
+
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  handleFieldChange() {
-    console.log('ds');
-  }
+  handleFieldChange() { }
 
   render() {
     return (
@@ -32,7 +36,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <title>Register</title>
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
-        <Form handleFieldChange={this.handleFieldChange} />
+        <RegisterContainer>
+          <Form handleFieldChange={this.handleFieldChange} />
+        </RegisterContainer>
       </div>
     );
   }

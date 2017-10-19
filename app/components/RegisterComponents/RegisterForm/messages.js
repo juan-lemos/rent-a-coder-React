@@ -43,9 +43,9 @@ export default defineMessages({
     defaultMessage: 'Web',
   },
 
-  singin: {
-    id: 'app.components.LoginForm.singin',
-    defaultMessage: 'Ingresar',
+  create: {
+    id: 'app.components.LoginForm.create',
+    defaultMessage: 'Crear',
   },
   error: {
     id: 'app.components.LoginForm.error',

@@ -18,6 +18,10 @@ export default defineMessages({
     id: 'app.components.RegisterComponents.Form.password',
     defaultMessage: 'Contraseña',
   },
+  confirmPassword: {
+    id: 'app.components.RegisterComponents.Form.confirmPassword',
+    defaultMessage: 'Confirmar contraseña',
+  },
   country: {
     id: 'app.components.RegisterComponents.Form.country',
     defaultMessage: 'País',

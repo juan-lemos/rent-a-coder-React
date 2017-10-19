@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -18,7 +18,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+// import messages from './messages';
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   handleFieldChange() {
@@ -33,7 +33,6 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
         <Form handleFieldChange={this.handleFieldChange} />
-        <FormattedMessage {...messages.header} />
       </div>
     );
   }

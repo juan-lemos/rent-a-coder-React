@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -17,7 +16,6 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectLoginPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-// import messages from './messages';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,6 +27,11 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     };
   }
 
+  handleChangeOnInputField(event) {
+    const change = {};
+    change[event.target.id] = event.target.value;
+    this.setState(change);
+  }
 
   render() {
     return (
@@ -36,8 +39,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         <LoginForm
           logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
           errorInLogin={this.state.errorInLogin}
-          handleEmailFieldChange={(event) => (this.setState({ email: event.target.value }))}
-          handlePasswordFieldChange={(event) => (this.setState({ password: event.target.value }))}
+          handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
           handleSignInClick={() => (console.log(this.state.email))}
         />
       </div>

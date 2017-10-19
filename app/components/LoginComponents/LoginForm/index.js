@@ -14,8 +14,7 @@ import messages from './messages';
 
 function LoginForm({
    logoUrl,
-  handleEmailFieldChange,
-  handlePasswordFieldChange,
+  handleFieldChange,
   handleSignInClick,
   errorInLogin,
   intl }) {
@@ -35,8 +34,9 @@ function LoginForm({
             </Col>
             <Col sm={12}>
               <FormControl
-                onChange={handleEmailFieldChange}
+                onChange={handleFieldChange}
                 type="input"
+                name="email"
                 placeholder={intl.formatMessage(messages.email)
                 }
               />
@@ -49,8 +49,9 @@ function LoginForm({
             </Col>
             <Col sm={12}>
               <FormControl
-                onChange={handlePasswordFieldChange}
+                onChange={handleFieldChange}
                 type="password"
+                name="password"
                 placeholder={intl.formatMessage(messages.password)}
               />
             </Col>
@@ -79,8 +80,7 @@ function LoginForm({
 LoginForm.propTypes = {
   logoUrl: PropTypes.string,
   errorInLogin: PropTypes.bool,
-  handleEmailFieldChange: PropTypes.func,
-  handlePasswordFieldChange: PropTypes.func,
+  handleFieldChange: PropTypes.func,
   handleSignInClick: PropTypes.func,
   intl: intlShape.isRequired,
 };

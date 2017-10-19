@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import Form from 'components/RegisterComponents/Form';
+import Form from 'components/RegisterComponents/RegisterForm';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectRegisterPage from './selectors';
@@ -21,14 +21,18 @@ import saga from './saga';
 import messages from './messages';
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  handleFieldChange() {
+    console.log('ds');
+  }
+
   render() {
     return (
       <div>
         <Helmet>
-          <title>RegisterPage</title>
+          <title>Register</title>
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
-        <Form />
+        <Form handleFieldChange={this.handleFieldChange} />
         <FormattedMessage {...messages.header} />
       </div>
     );

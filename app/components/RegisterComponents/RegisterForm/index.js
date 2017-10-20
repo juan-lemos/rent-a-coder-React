@@ -4,20 +4,37 @@
 *
 */
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 // import styled from 'styled-components';
 
-import { FormattedMessage } from 'react-intl';
-import { Well, Form, FormGroup, Col, FormControl, Button } from 'react-bootstrap';
+// import FormField from 'components/common/FormField';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Well, Form, FormGroup, Col, FormControl, Button, ControlLabel } from 'react-bootstrap';
 import messages from './messages';
 
-function RegisterForm() {
+
+function RegisterForm({
+  handleFieldChange,
+  handleCreateInClick,
+  nameField,
+  intl,
+}) {
   return (
     <div>
       <Well>
+
         <Form horizontal>
 
-          <FormGroup>
+          {/* <FormField
+            fieldName={intl.formatMessage(messages.name)}
+            fieldId={nameField.fieldId}
+            validationState={nameField.validationState}
+            onChange={() => (console.log('ds'))}
+            inputType="input"
+            errorMessage="ds"
+          /> */}
+
+          <FormGroup validationState="error">
             <Col sm={12}>
               <FormattedMessage {...messages.name} />
             </Col>
@@ -25,7 +42,10 @@ function RegisterForm() {
               <FormControl
                 type="input"
                 name="name"
+                onChange={handleFieldChange}
               />
+              <FormControl.Feedback />
+              <ControlLabel>Input with error and feedback icon</ControlLabel>
             </Col>
           </FormGroup>
 
@@ -37,6 +57,7 @@ function RegisterForm() {
               <FormControl
                 type="input"
                 name="userName"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -49,6 +70,7 @@ function RegisterForm() {
               <FormControl
                 type="email"
                 name="email"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -61,6 +83,7 @@ function RegisterForm() {
               <FormControl
                 type="password"
                 name="password"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -73,6 +96,7 @@ function RegisterForm() {
               <FormControl
                 type="password"
                 name="confirmationPassword"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -85,6 +109,7 @@ function RegisterForm() {
               <FormControl
                 type="input"
                 name="country"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -97,6 +122,7 @@ function RegisterForm() {
               <FormControl
                 type="input"
                 name="city"
+                onChange={handleFieldChange}
               />
             </Col>
           </FormGroup>
@@ -109,6 +135,7 @@ function RegisterForm() {
               <FormControl
                 type="input"
                 name="telephone"
+
               />
             </Col>
           </FormGroup>
@@ -128,7 +155,7 @@ function RegisterForm() {
 
           <FormGroup>
             <Col sm={12}>
-              <Button type="submit">
+              <Button type="submit" onClick={handleCreateInClick}>
                 <FormattedMessage {...messages.create} />
               </Button>
             </Col>
@@ -142,7 +169,10 @@ function RegisterForm() {
 }
 
 RegisterForm.propTypes = {
-
+  handleFieldChange: PropTypes.func,
+  handleCreateInClick: PropTypes.func,
+  nameField: PropTypes.object,
+  intl: intlShape.isRequired,
 };
 
-export default RegisterForm;
+export default injectIntl(RegisterForm);

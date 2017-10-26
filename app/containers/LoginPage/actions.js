@@ -5,11 +5,28 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
 } from './constants';
 
-export function defaultAction() {
+export function login(content) {
   return {
-    type: DEFAULT_ACTION,
+    type: LOGIN,
+    content,
+  };
+}
+
+export function loginLoaded(content) {
+  return {
+    type: LOGIN_SUCCESS,
+    content,
+  };
+}
+
+export function loginError(error) {
+  return {
+    type: LOGIN_ERROR,
+    error,
   };
 }

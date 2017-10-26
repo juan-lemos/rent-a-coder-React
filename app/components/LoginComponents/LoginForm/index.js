@@ -59,7 +59,7 @@ function LoginForm({
 
           <FormGroup>
             <Col sm={12}>
-              <Button type="submit" onClick={handleSignInClick}>
+              <Button onClick={() => handleSignInClick()}>
                 <FormattedMessage {...messages.singin} />
               </Button>
             </Col>

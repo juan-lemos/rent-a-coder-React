@@ -5,6 +5,7 @@
  */
 
 import { fromJS } from 'immutable';
+
 import {
   LOGIN,
   LOGIN_SUCCESS,
@@ -25,10 +26,12 @@ function loginPageReducer(state = initialState, action) {
         .set('errorLogin', false)
         .set('responseLogin', null);
     case LOGIN_SUCCESS:
+      console.log('resp succ');
       return state
         .set('loadingLogin', false)
         .set('responseLogin', action.content);
     case LOGIN_ERROR:
+      console.log('resp error');
       return state
         .set('loadingLogin', false)
         .set('errorLogin', action.error);

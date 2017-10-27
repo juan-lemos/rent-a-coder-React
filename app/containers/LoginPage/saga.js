@@ -6,12 +6,15 @@ import { LOGIN } from './constants';
 
 export function* loginPut(action) {
   const loginReference = 'https://rent-a-coder-api.herokuapp.com/auth/sign_in';
+  console.log(JSON.stringify({
+    ...action.content,
+  }));
 
   try {
     yield call(request, loginReference, {
       method: 'POST',
       body: JSON.stringify({
-        content: action.content,
+        ...action.content,
       }),
     });
     yield put(loginLoaded(action.content));
@@ -20,8 +23,8 @@ export function* loginPut(action) {
   }
 }
 
-export function* login() {
+export default function* login() {
   yield takeLatest(LOGIN, loginPut);
 }
 
-export default [login];
+// export default [login];

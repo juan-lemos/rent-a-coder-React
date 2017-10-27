@@ -1,21 +1,22 @@
-/**
- *
- * LoginPage
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import LoginForm from 'components/LoginComponents/LoginForm';
-import injectSaga from 'utils/injectSaga';
-import injectReducer from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
-import reducer from './reducer';
+
 import saga from './saga';
+
+import injectReducer from 'utils/injectReducer';
+import injectSaga from 'utils/injectSaga';
+import {
+  makeSelectLogin,
+  makeSelectLoginLoading,
+  makeSelectLoginError,
+} from './selectors';
+import reducer from './reducer';
+import { login } from './actions';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -28,7 +29,9 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   }
 
   handleSignInClick() {
-    this.props.history.push('/home');
+    const { email, password } = this.state;
+    this.props.onLogin({ email, password });
+    // this.props.history.push('/home');
   }
 
   handleChangeOnInputField(event) {
@@ -39,37 +42,46 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
 
   render() {
     return (
-      <div style={{ maxWidth: '300px', margin: 'auto' }}>
-        <LoginForm
-          logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-          errorInLogin={this.state.errorInLogin}
-          handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
-          handleSignInClick={() => this.handleSignInClick()}
-        />
+      <div>
+        <Helmet>
+          <title>LoginPage</title>
+          <meta name="description" content="Description of LoginPage" />
+        </Helmet>
+        <div style={{ maxWidth: '300px', margin: 'auto' }}>
+          <LoginForm
+            logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
+            errorInLogin={this.state.errorInLogin}
+            handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
+            handleSignInClick={() => this.handleSignInClick()}
+          />
+        </div>
       </div>
     );
   }
 }
 
 LoginPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
   history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginpage: makeSelectLoginPage(),
+  loginResponse: makeSelectLogin,
+  loginLoading: makeSelectLoginLoading,
+  loginError: makeSelectLoginError,
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLogin: (evt) => {
+      dispatch(login(evt));
+    },
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'loginPage', reducer });
-const withSaga = injectSaga({ key: 'loginPage', saga });
+const withSaga = injectSaga({ key: 'home', saga });
 
 export default compose(
   withReducer,

@@ -6,10 +6,10 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import LoginForm from 'components/LoginComponents/LoginForm';
 
-import saga from './saga';
-
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
+import saga from './saga';
+
 import {
   makeSelectLogin,
   makeSelectLoginLoading,
@@ -61,7 +61,8 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
 }
 
 LoginPage.propTypes = {
-  history: PropTypes.object,
+  // history: PropTypes.object,
+  onLogin: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -81,7 +82,7 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({ key: 'loginPage', reducer });
-const withSaga = injectSaga({ key: 'home', saga });
+const withSaga = injectSaga({ key: 'loginPage', saga });
 
 export default compose(
   withReducer,

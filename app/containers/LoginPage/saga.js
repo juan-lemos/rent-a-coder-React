@@ -1,5 +1,5 @@
 import request from 'utils/request';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { loginLoaded, loginError } from './actions';
 import { LOGIN } from './constants';
 
@@ -27,8 +27,13 @@ export function* loginPut(action) {
   }
 }
 
-export default function* login() {
-  yield takeLatest(LOGIN, loginPut);
+// export default function* loginSagas() {
+//   yield takeLatest(LOGIN, loginPut);
+// }
+
+export default function* rootSaga() {
+  yield all([
+    takeLatest(LOGIN, loginPut),
+  ]);
 }
 
-// export default [login];

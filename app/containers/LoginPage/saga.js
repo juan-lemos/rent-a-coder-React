@@ -3,21 +3,27 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { loginLoaded, loginError } from './actions';
 import { LOGIN } from './constants';
 
-
 export function* loginPut(action) {
   const loginReference = 'https://rent-a-coder-api.herokuapp.com/auth/sign_in';
-  console.log(JSON.stringify({
-    ...action.content,
-  }));
 
   try {
-    yield call(request, loginReference, {
+    const response = yield call(request, loginReference, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify({
         ...action.content,
+
+        // email: 'jhon@hot.com',
+        // password: '12345678',
+
       }),
+      mode: 'cors',
+      redirect: 'follow',
     });
-    yield put(loginLoaded(action.content));
+    yield put(loginLoaded(response));
   } catch (err) {
     yield put(loginError(err));
   }

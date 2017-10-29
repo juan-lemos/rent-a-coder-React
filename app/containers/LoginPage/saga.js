@@ -5,13 +5,13 @@ import { LOGIN } from './constants';
 
 export function* loginPut(action) {
   const loginReference = 'https://rent-a-coder-api.herokuapp.com/auth/sign_in';
-
   try {
     const response = yield call(request, loginReference, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
         ...action.content,
@@ -20,8 +20,6 @@ export function* loginPut(action) {
         // password: '12345678',
 
       }),
-      mode: 'cors',
-      redirect: 'follow',
     });
     yield put(loginLoaded(response));
   } catch (err) {

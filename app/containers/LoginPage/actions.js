@@ -18,6 +18,7 @@ export function login(content) {
 }
 
 export function loginLoaded(content) {
+  console.log(content);
   return {
     type: LOGIN_SUCCESS,
     content,

@@ -49,7 +49,7 @@ function loginPageReducer(state = initialState, action) {
       console.log('resp error');
       return state
         .set('loadingLogin', false)
-        .set('errorLogin', action.error);
+        .set('errorLogin', true);
     default:
       return state;
   }

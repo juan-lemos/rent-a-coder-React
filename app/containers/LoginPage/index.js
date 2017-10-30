@@ -28,10 +28,15 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.loginLoading && nextProps.loginResponse != null) {
+      this.props.history.push('/home');
+    }
+  }
+
   handleSignInClick() {
     const { email, password } = this.state;
     this.props.onLogin({ email, password });
-    // this.props.history.push('/home');
   }
 
   handleChangeOnInputField(event) {
@@ -50,7 +55,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         <div style={{ maxWidth: '300px', margin: 'auto' }}>
           <LoginForm
             logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-            errorInLogin={this.state.errorInLogin}
+            errorInLogin={this.props.loginError}
             handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
             handleSignInClick={() => this.handleSignInClick()}
           />
@@ -61,8 +66,11 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
 }
 
 LoginPage.propTypes = {
-  // history: PropTypes.object,
+  history: PropTypes.object,
   onLogin: PropTypes.func,
+  loginResponse: PropTypes.object,
+  loginLoading: PropTypes.bool,
+  loginError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

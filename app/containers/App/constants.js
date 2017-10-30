@@ -10,3 +10,6 @@
  */
 
 export const DEFAULT_LOCALE = 'en';
+export const SESSION_TOKEN = 'Access-Token';
+export const SESSION_CLIENT = 'Client';
+export const SESSION_UID = 'Uid';

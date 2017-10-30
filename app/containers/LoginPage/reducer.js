@@ -7,6 +7,19 @@
 import { fromJS } from 'immutable';
 
 import {
+  setSessionToken,
+  setSessionClient,
+  setSessionUid,
+}
+  from 'containers/App/sessionSetters';
+
+import {
+  SESSION_TOKEN,
+  SESSION_CLIENT,
+  SESSION_UID,
+}
+  from 'containers/App/constants';
+import {
   LOGIN,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -27,9 +40,12 @@ function loginPageReducer(state = initialState, action) {
         .set('responseLogin', null);
     case LOGIN_SUCCESS:
       console.log('resp succ');
+      setSessionToken(action.content.header.get(SESSION_TOKEN));
+      setSessionClient(action.content.header.get(SESSION_CLIENT));
+      setSessionUid(action.content.header.get(SESSION_UID));
       return state
         .set('loadingLogin', false)
-        .set('responseLogin', action.content);
+        .set('responseLogin', action.content.body);
     case LOGIN_ERROR:
       console.log('resp error');
       return state

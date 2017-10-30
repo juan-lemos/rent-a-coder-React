@@ -8,15 +8,15 @@ import LoginForm from 'components/LoginComponents/LoginForm';
 
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import saga from './saga';
-
 import {
   makeSelectLogin,
   makeSelectLoginLoading,
   makeSelectLoginError,
-} from './selectors';
-import reducer from './reducer';
-import { login } from './actions';
+} from 'containers/App/selectors';
+
+import reducer from 'containers/App/reducer';
+import { login } from 'containers/App/actions';
+import saga from './saga';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -81,8 +81,8 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'loginPage', reducer });
-const withSaga = injectSaga({ key: 'loginPage', saga });
+const withReducer = injectReducer({ key: 'global', reducer });
+const withSaga = injectSaga({ key: 'global', saga });
 
 export default compose(
   withReducer,

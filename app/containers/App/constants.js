@@ -13,3 +13,7 @@ export const DEFAULT_LOCALE = 'en';
 export const SESSION_TOKEN = 'Access-Token';
 export const SESSION_CLIENT = 'Client';
 export const SESSION_UID = 'Uid';
+
+export const LOGIN = 'app/App/LOGIN';
+export const LOGIN_SUCCESS = 'app/App/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'app/App/LOGIN_ERROR';

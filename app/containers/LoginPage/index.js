@@ -30,7 +30,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.loginLoading && nextProps.loginResponse != null) {
-      this.props.history.push('/home');
+      this.props.history.push('/profile');
     }
   }
 

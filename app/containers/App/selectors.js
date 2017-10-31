@@ -1,22 +1,14 @@
 import { createSelector } from 'reselect';
+import { SESSION_CLIENT, SESSION_TOKEN, SESSION_UID } from './constants';
+
 
 const selectRoute = (state) => state.get('route');
 
-const selectGlobal = (state) => state.get('global');
+const makeSelectSessionToken = () => sessionStorage.getItem(SESSION_TOKEN);
 
-const makeSelectLogin = () =>
-createSelector(selectGlobal, (substate) =>
-  substate.get('responseLogin')
-);
-const makeSelectLoginLoading = () =>
-createSelector(selectGlobal, (substate) =>
-  substate.get('loadingLogin')
-);
-const makeSelectLoginError = () =>
-createSelector(selectGlobal, (substate) =>
-  substate.get('errorLogin')
-);
+const makeSelectSessionClient = () => sessionStorage.getItem(SESSION_CLIENT);
 
+const makeSelectSessionUid = () => sessionStorage.getItem(SESSION_UID);
 
 const makeSelectLocation = () => createSelector(
   selectRoute,
@@ -25,7 +17,7 @@ const makeSelectLocation = () => createSelector(
 
 export {
   makeSelectLocation,
-  makeSelectLogin,
-  makeSelectLoginLoading,
-  makeSelectLoginError,
+  makeSelectSessionToken,
+  makeSelectSessionClient,
+  makeSelectSessionUid,
 };

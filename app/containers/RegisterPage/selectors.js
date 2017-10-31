@@ -9,7 +9,6 @@ const selectRegisterPageDomain = (state) => state.get('registerPage');
  * Other specific selectors
  */
 
-
 /**
  * Default selector used by RegisterPage
  */

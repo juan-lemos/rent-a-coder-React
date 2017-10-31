@@ -17,12 +17,14 @@ import {
   SESSION_TOKEN,
   SESSION_CLIENT,
   SESSION_UID,
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
 }
   from 'containers/App/constants';
 
+import {
+  LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+} from './constants';
 
 const initialState = fromJS({
   loadingLogin: false,

@@ -1,7 +1,7 @@
 import request from 'utils/requestHeaderBody';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { loginLoaded, loginError } from 'containers/App/actions';
-import { LOGIN } from 'containers/App/constants';
+import { loginLoaded, loginError } from './actions';
+import { LOGIN } from './constants';
 
 export function* loginPut(action) {
   const loginReference = 'https://rent-a-coder-api.herokuapp.com/auth/sign_in';

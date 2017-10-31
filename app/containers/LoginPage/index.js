@@ -12,10 +12,10 @@ import {
   makeSelectLogin,
   makeSelectLoginLoading,
   makeSelectLoginError,
-} from 'containers/App/selectors';
+} from './selectors';
 
-import reducer from 'containers/App/reducer';
-import { login } from 'containers/App/actions';
+import reducer from './reducer';
+import { login } from './actions';
 import saga from './saga';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -89,8 +89,8 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'global', reducer });
-const withSaga = injectSaga({ key: 'global', saga });
+const withReducer = injectReducer({ key: 'loginPage', reducer });
+const withSaga = injectSaga({ key: 'loginPage', saga });
 
 export default compose(
   withReducer,

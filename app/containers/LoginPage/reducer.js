@@ -1,9 +1,3 @@
-/*
- *
- * LoginPage reducer
- *
- */
-
 import { fromJS } from 'immutable';
 
 import {
@@ -40,7 +34,6 @@ function loginPageReducer(state = initialState, action) {
         .set('errorLogin', false)
         .set('responseLogin', null);
     case LOGIN_SUCCESS:
-      console.log('resp succ');
       setSessionToken(action.content.header.get(SESSION_TOKEN));
       setSessionClient(action.content.header.get(SESSION_CLIENT));
       setSessionUid(action.content.header.get(SESSION_UID));
@@ -48,7 +41,6 @@ function loginPageReducer(state = initialState, action) {
         .set('loadingLogin', false)
         .set('responseLogin', action.content.body);
     case LOGIN_ERROR:
-      console.log('resp error');
       return state
         .set('loadingLogin', false)
         .set('errorLogin', true);

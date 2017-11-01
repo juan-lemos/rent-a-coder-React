@@ -19,7 +19,7 @@ import ProfilePage from 'containers/ProfilePage/Loadable';
 import LoginPage from 'containers/LoginPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationBar from 'components/common/NavigationBar';
-import RegisterPage from 'containers/RegisterPage/Loadable';
+import RegisterPage from 'containers/RegisterPage';
 
 export default function App() {
   return (

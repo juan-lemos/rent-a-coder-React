@@ -1,24 +1,22 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the registerPage state domain
- */
 const selectRegisterPageDomain = (state) => state.get('registerPage');
 
-/**
- * Other specific selectors
- */
+const makeSelectRegister = () =>
+  createSelector(selectRegisterPageDomain, (substate) =>
+    substate.get('responseRegister')
+  );
+const makeSelectRegisterLoading = () =>
+  createSelector(selectRegisterPageDomain, (substate) =>
+    substate.get('loadingRegister')
+  );
+const makeSelectRegisterError = () =>
+  createSelector(selectRegisterPageDomain, (substate) =>
+    substate.get('errorRegister')
+  );
 
-/**
- * Default selector used by RegisterPage
- */
-
-const makeSelectRegisterPage = () => createSelector(
-  selectRegisterPageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectRegisterPage;
 export {
-  selectRegisterPageDomain,
+  makeSelectRegister,
+  makeSelectRegisterLoading,
+  makeSelectRegisterError,
 };

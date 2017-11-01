@@ -1,11 +1,5 @@
-/**
- *
- * RegisterPage
- *
- */
-
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -15,9 +9,14 @@ import styled from 'styled-components';
 import Form from 'components/RegisterComponents/RegisterForm';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectRegisterPage from './selectors';
+import { register } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import {
+  makeSelectRegister,
+  makeSelectRegisterLoading,
+  makeSelectRegisterError,
+} from './selectors';
 
 
 const RegisterContainer = styled.div`
@@ -45,16 +44,20 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 }
 
 RegisterPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+
 };
 
 const mapStateToProps = createStructuredSelector({
-  registerpage: makeSelectRegisterPage(),
+  registerResponse: makeSelectRegister(),
+  registerLoading: makeSelectRegisterLoading(),
+  registerError: makeSelectRegisterError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLogin: (evt) => {
+      dispatch(register(evt));
+    },
   };
 }
 

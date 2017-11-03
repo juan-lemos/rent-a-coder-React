@@ -1,19 +1,14 @@
-/**
-*
-* FormField
-*
-*/
-
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { FormControl, Col, FormGroup, ControlLabel } from 'react-bootstrap';
 
-function FormField({
+function FormInputField({
   fieldName,
   fieldId,
   validationState,
   onChange,
-  inputType = 'input',
   errorMessage,
+  inputType,
 }) {
   return (
     <FormGroup validationState={validationState}>
@@ -33,14 +28,13 @@ function FormField({
   );
 }
 
-FormField.propTypes = {
+FormInputField.propTypes = {
   fieldName: PropTypes.string,
   fieldId: PropTypes.string,
   validationState: PropTypes.string,
   onChange: PropTypes.func,
-  inputType: PropTypes.string,
-  thereIsError: PropTypes.bool,
   errorMessage: PropTypes.string,
+  inputType: PropTypes.string,
 };
 
-export default FormField;
+export default FormInputField;

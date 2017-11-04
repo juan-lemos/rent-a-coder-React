@@ -23,25 +23,25 @@ const RegisterContainer = styled.div`
   margin : auto;
 `;
 
-function fieldObj(id, error, name, inputType) {
-  return ({ id: `${id}`, error, name: `${name}`, inputType: `${inputType}` });
+function fieldObj(error, name, inputType) {
+  return ({ error, name: `${name}`, inputType: `${inputType}` });
 }
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
-      formFields: [
-        fieldObj('name', false, 'Nombre', 'input'),
-        fieldObj('nickname', false, 'Nombre de usuario', 'input'),
-        fieldObj('email', false, 'Email', 'input'),
-        fieldObj('password', false, 'Contraseña', 'password'),
-        fieldObj('password_confirmation', false, 'Repita contraseña', 'password'),
-        fieldObj('city', false, 'Ciudad', 'input'),
-        fieldObj('country', false, 'País', 'input'),
-        fieldObj('tel', false, 'Tel.', 'input'),
-        fieldObj('web', false, 'Web', 'input'),
-      ],
+      formFields: {
+        name: fieldObj(false, 'Nombre', 'input'),
+        nickname: fieldObj(false, 'Nombre de usuario', 'input'),
+        email: fieldObj(false, 'Email', 'input'),
+        password: fieldObj(false, 'Contraseña', 'password'),
+        password_confirmation: fieldObj(false, 'Repita contraseña', 'password'),
+        city: fieldObj(false, 'Ciudad', 'input'),
+        country: fieldObj(false, 'País', 'input'),
+        tel: fieldObj(false, 'Tel.', 'input'),
+        web: fieldObj(false, 'Web', 'input'),
+      },
     };
     this.values = {
       name: '',
@@ -56,6 +56,28 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.registerLoading && nextProps.registerResponse != null) {
+      this.props.history.push('/profile');
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.registerError != null) {
+      let propertyName;
+      let property;
+      const properties = this.state.formFields;
+      for (property in properties) {// eslint-disable-line 
+        properties[property].error = false;
+      }
+      for (propertyName in nextProps.registerError.errors) {// eslint-disable-line 
+        if (properties[propertyName] !== undefined) {
+          properties[propertyName].error = true;
+        }
+      }
+    }
+  }
+
   handleFieldChange(event) {
     this.values[event.target.name] = event.target.value;
   }
@@ -65,6 +87,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
   }
 
   render() {
+    // console.log()
     return (
       <div>
         <Helmet>
@@ -85,6 +108,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
 RegisterPage.propTypes = {
   onCreate: PropTypes.func,
+  registerResponse: PropTypes.object,
+  registerLoading: PropTypes.bool,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

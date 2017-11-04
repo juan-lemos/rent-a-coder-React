@@ -18,7 +18,8 @@ export function* registerPut(action) {
     });
     yield put(registerLoaded(response));
   } catch (err) {
-    yield put(registerError(err));
+    const error = yield Promise.resolve(err);
+    yield put(registerError(error));
   }
 }
 

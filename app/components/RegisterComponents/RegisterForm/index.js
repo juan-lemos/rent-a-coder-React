@@ -17,16 +17,16 @@ function RegisterForm({
       <Well>
 
         <Form horizontal>
-          {formFields.map((item, i) =>
+          {Object.keys(formFields).map((key) =>
             (
               <FormInputField
-                fieldName={item.name}
-                fieldId={item.id}
-                validationState={item.error ? 'error' : null}
+                fieldName={formFields[key].name}
+                fieldId={key}
+                validationState={formFields[key].error ? 'error' : null}
                 onChange={handleFieldChange}
                 errorMessage={intl.formatMessage(messages.error)}
-                inputType={item.inputType}
-                key={i}
+                inputType={formFields[key].inputType}
+                key={key}
               />
             ))}
           <FormGroup>
@@ -47,7 +47,7 @@ function RegisterForm({
 RegisterForm.propTypes = {
   handleFieldChange: PropTypes.func,
   handleCreateOnClick: PropTypes.func,
-  formFields: PropTypes.array,
+  formFields: PropTypes.any,
   intl: intlShape.isRequired,
 };
 

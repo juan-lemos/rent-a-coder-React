@@ -22,7 +22,7 @@ import {
 
 const initialState = fromJS({
   loadingRegister: false,
-  errorRegister: false,
+  errorRegister: null,
   responseRegister: null,
 });
 
@@ -31,7 +31,7 @@ function registerPageReducer(state = initialState, action) {
     case REGISTER:
       return state
         .set('loadingRegister', true)
-        .set('errorRegister', false)
+        .set('errorRegister', null)
         .set('responseRegister', null);
     case REGISTER_SUCCESS:
       setSessionToken(action.content.header.get(SESSION_TOKEN));
@@ -43,7 +43,7 @@ function registerPageReducer(state = initialState, action) {
     case REGISTER_ERROR:
       return state
         .set('loadingRegister', false)
-        .set('errorRegister', true);
+        .set('errorRegister', action.error);
     default:
       return state;
   }

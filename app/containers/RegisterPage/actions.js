@@ -19,7 +19,6 @@ export function registerLoaded(content) {
 }
 
 export function registerError(error) {
-  console.log(error);
   return {
     type: REGISTER_ERROR,
     error,

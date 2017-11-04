@@ -26,10 +26,9 @@ function checkStatus(response) {
     return response;
   }
 
-  // const error = new Error(response.statusText);
-  // error.response = response.json();
   throw response.json();
 }
+
 
 /**
  * Requests a URL, returning a promise

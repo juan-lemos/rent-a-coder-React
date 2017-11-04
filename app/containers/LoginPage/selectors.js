@@ -1,25 +1,22 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the loginPage state domain
- */
 const selectLoginPageDomain = (state) => state.get('loginPage');
 
-/**
- * Other specific selectors
- */
+const makeSelectLogin = () =>
+  createSelector(selectLoginPageDomain, (substate) =>
+    substate.get('responseLogin')
+  );
+const makeSelectLoginLoading = () =>
+  createSelector(selectLoginPageDomain, (substate) =>
+    substate.get('loadingLogin')
+  );
+const makeSelectLoginError = () =>
+  createSelector(selectLoginPageDomain, (substate) =>
+    substate.get('errorLogin')
+  );
 
-
-/**
- * Default selector used by LoginPage
- */
-
-const makeSelectLoginPage = () => createSelector(
-  selectLoginPageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectLoginPage;
 export {
-  selectLoginPageDomain,
+  makeSelectLogin,
+  makeSelectLoginLoading,
+  makeSelectLoginError,
 };

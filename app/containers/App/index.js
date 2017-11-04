@@ -16,22 +16,22 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage/Loadable';
 import ProfilePage from 'containers/ProfilePage/Loadable';
-import LoginPage from 'containers/LoginPage/Loadable';
+import LoginPage from 'containers/LoginPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationBar from 'components/common/NavigationBar';
+import RegisterPage from 'containers/RegisterPage';
 
 export default function App() {
   return (
     <div>
-      <Switch>
-        <Route path="/" component={NavigationBar} />
-      </Switch>
+      <NavigationBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+    </div >
   );
 }

@@ -14,6 +14,10 @@ export default defineMessages({
     id: 'app.components.NavigationBar.profile',
     defaultMessage: 'Profile',
   },
+  login: {
+    id: 'app.components.NavigationBar.login',
+    defaultMessage: 'Login',
+  },
   publish: {
     id: 'app.components.NavigationBar.publish',
     defaultMessage: 'Publish',

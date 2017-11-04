@@ -15,38 +15,38 @@ import {
   from 'containers/App/constants';
 
 import {
-  LOGIN,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
+  REGISTER,
+  REGISTER_SUCCESS,
+  REGISTER_ERROR,
 } from './constants';
 
 const initialState = fromJS({
-  loadingLogin: false,
-  errorLogin: false,
-  responseLogin: null,
+  loadingRegister: false,
+  errorRegister: null,
+  responseRegister: null,
 });
 
-function loginPageReducer(state = initialState, action) {
+function registerPageReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case REGISTER:
       return state
-        .set('loadingLogin', true)
-        .set('errorLogin', false)
-        .set('responseLogin', null);
-    case LOGIN_SUCCESS:
+        .set('loadingRegister', true)
+        .set('errorRegister', null)
+        .set('responseRegister', null);
+    case REGISTER_SUCCESS:
       setSessionToken(action.content.header.get(SESSION_TOKEN));
       setSessionClient(action.content.header.get(SESSION_CLIENT));
       setSessionUid(action.content.header.get(SESSION_UID));
       return state
-        .set('loadingLogin', false)
-        .set('responseLogin', action.content.body);
-    case LOGIN_ERROR:
+        .set('loadingRegister', false)
+        .set('responseRegister', action.content.body);
+    case REGISTER_ERROR:
       return state
-        .set('loadingLogin', false)
-        .set('errorLogin', true);
+        .set('loadingRegister', false)
+        .set('errorRegister', action.error);
     default:
       return state;
   }
 }
 
-export default loginPageReducer;
+export default registerPageReducer;

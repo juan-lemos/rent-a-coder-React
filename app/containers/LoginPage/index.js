@@ -1,51 +1,89 @@
-/**
- *
- * LoginPage
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { FormattedMessage } from 'react-intl';
+import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import LoginForm from 'components/LoginComponents/LoginForm';
 
-import LoginForm from 'components/LoginForm';
-import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
+import injectSaga from 'utils/injectSaga';
+import {
+  makeSelectLogin,
+  makeSelectLoginLoading,
+  makeSelectLoginError,
+} from './selectors';
+
 import reducer from './reducer';
+import { login } from './actions';
 import saga from './saga';
-// import messages from './messages';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      errorInLogin: false,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.loginLoading && nextProps.loginResponse != null) {
+      this.props.history.push('/profile');
+    }
+  }
+
+  handleSignInClick() {
+    const { email, password } = this.state;
+    this.props.onLogin({ email, password });
+  }
+
+  handleChangeOnInputField(event) {
+    const change = {};
+    change[event.target.name] = event.target.value;
+    this.setState(change);
+  }
+
   render() {
     return (
-      <div style={{ maxWidth: '300', margin: 'auto' }}>
-        <LoginForm
-          logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-          errorInLogin
-          handleEmailFieldChange={() => (console.log())}
-          handlePasswordFieldChange={() => (console.log())}
-          handleSignInClick={() => (console.log())}
-        />
+      <div>
+        <Helmet>
+          <title>LoginPage</title>
+          <meta name="description" content="Description of LoginPage" />
+        </Helmet>
+        <div style={{ maxWidth: '300px', margin: 'auto' }}>
+          <LoginForm
+            logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
+            errorInLogin={this.props.loginError}
+            handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
+            handleSignInClick={() => this.handleSignInClick()}
+          />
+        </div>
       </div>
     );
   }
 }
 
 LoginPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object,
+  onLogin: PropTypes.func,
+  loginResponse: PropTypes.object,
+  loginLoading: PropTypes.bool,
+  loginError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginpage: makeSelectLoginPage(),
+  loginResponse: makeSelectLogin(),
+  loginLoading: makeSelectLoginLoading(),
+  loginError: makeSelectLoginError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onLogin: (evt) => {
+      dispatch(login(evt));
+    },
   };
 }
 

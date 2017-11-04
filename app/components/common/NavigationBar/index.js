@@ -8,7 +8,9 @@ import React from 'react';
 // import styled from 'styled-components';
 
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import messages from './messages';
 
 
@@ -17,9 +19,9 @@ function NavigationBar() {
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="/">
+          <Link to="/">
             <FormattedMessage {...messages.pageName} />
-          </a>
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -30,9 +32,16 @@ function NavigationBar() {
           </NavItem>
         </Nav>
         <Nav pullRight>
-          <NavItem eventKey={1} href="#">
-            <FormattedMessage {...messages.profile} />
-          </NavItem>
+          <LinkContainer to="/login">
+            <NavItem eventKey={1}>
+              <FormattedMessage {...messages.login} />
+            </NavItem>
+          </LinkContainer>
+          <LinkContainer to="/profile">
+            <NavItem eventKey={2}>
+              <FormattedMessage {...messages.profile} />
+            </NavItem>
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

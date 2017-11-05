@@ -1,25 +1,38 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the publishProjectPage state domain
- */
 const selectPublishProjectPageDomain = (state) => state.get('publishProjectPage');
 
-/**
- * Other specific selectors
- */
+const makeSelectTechnologies = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('responseTechnologies')
+  );
+const makeSelectTechnologiesLoading = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('loadingTechnologies')
+  );
+const makeSelectTechnologiesError = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('errorTechnologies')
+  );
 
+const makeSelectProject = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('responsePutProject')
+  );
+const makeSelectProjectLoading = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('loadingPutProject')
+  );
+const makeSelectProjectError = () =>
+  createSelector(selectPublishProjectPageDomain, (substate) =>
+    substate.get('errorPutProject')
+  );
 
-/**
- * Default selector used by PublishProjectPage
- */
-
-const makeSelectPublishProjectPage = () => createSelector(
-  selectPublishProjectPageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectPublishProjectPage;
 export {
-  selectPublishProjectPageDomain,
+  makeSelectTechnologies,
+  makeSelectTechnologiesLoading,
+  makeSelectTechnologiesError,
+  makeSelectProject,
+  makeSelectProjectLoading,
+  makeSelectProjectError,
 };

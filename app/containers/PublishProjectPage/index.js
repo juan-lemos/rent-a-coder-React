@@ -4,17 +4,37 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import ProjectForm from 'components/PublishProjectComponents/ProjectForm';
 import moment from 'moment';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+import LoadingIndicator from 'components/common/LoadingIndicator';
 
+import {
+  getTechnologies,
+  putProject,
+  cleanPutStates,
+} from './actions';
 
-import makeSelectPublishProjectPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import {
+  makeSelectTechnologies,
+  makeSelectTechnologiesLoading,
+  makeSelectTechnologiesError,
+  makeSelectProject,
+  makeSelectProjectLoading,
+  makeSelectProjectError,
+} from './selectors';
+
+
+const Container = styled.div`
+  max-width : 500px;
+  margin : auto;
+`;
 
 export class PublishProjectPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -22,10 +42,6 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
     super(props);
     this.state = {
       startDate: moment(),
-      technologies: [
-        { value: 1, label: 'One' },
-        { value: 2, label: 'Two' },
-      ],
       selectedTechnologies: [],
       errorsInFields: {
         name: false,
@@ -42,8 +58,35 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
     };
   }
 
+  componentWillMount() {
+    this.props.onGetTechnologies();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.createProjectLoading && nextProps.createProjectResponse != null) {
+      this.props.cleanPutProject();
+      this.props.history.push('/profile');
+    }
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.createProjectError != null) {
+      let propertyName;
+      let property;
+      const properties = this.state.errorsInFields;
+      for (property in properties) {// eslint-disable-line 
+        properties[property] = false;
+      }
+      for (propertyName in nextProps.createProjectError.errors) {// eslint-disable-line 
+        if (properties[propertyName] !== undefined) {
+          properties[propertyName] = true;
+        }
+      }
+    }
+  }
+
   handleDateChange(date) {
-    this.values.deadline = `${date.year()}\\${date.month() + 1}\\${date.date()}`;
+    this.values.deadline = `${date.year()}-${date.month() + 1}-${date.date()}`;
     this.setState({
       startDate: date,
     });
@@ -63,41 +106,77 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
     this.state.selectedTechnologies.forEach((item) =>
       this.values.technologies_ids.push(item.value)
     );
+    this.props.onCreateProject({ ...this.values });
   }
 
+
   render() {
-    return (
-      <div>
-        <Helmet>
-          <title>PublishProjectPage</title>
-          <meta name="description" content="Description of PublishProjectPage" />
-        </Helmet>
+    let renderBody;
+    if (this.props.technologiesLoading) {
+      renderBody = <LoadingIndicator />;
+    } else if (this.props.technologiesError) {
+      renderBody = <div>Error Loading</div>;
+    } else if (this.props.technologiesResponse != null) {
+      renderBody = (
         <ProjectForm
           date={this.state.startDate}
           handleDateChange={(date) => this.handleDateChange(date)}
           handleFieldChange={(event) => this.handleFieldChange(event)}
           handleSelectedTechnologies={(val) => this.handleSelectedTechnologies(val)}
           handleClickOnCreate={() => this.handleClickOnCreate()}
-          technologies={this.state.technologies}
+          technologies={this.props.technologiesResponse}
           selectedTechnologies={this.state.selectedTechnologies}
           errorsInFields={this.state.errorsInFields}
         />
-      </div >
+      );
+    }
+
+    return (
+      <div>
+        <Helmet>
+          <title>PublishProjectPage</title>
+          <meta name="description" content="Description of PublishProjectPage" />
+        </Helmet>
+        <Container>
+          {renderBody}
+        </Container>
+      </div>
     );
   }
 }
 
 PublishProjectPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onGetTechnologies: PropTypes.func,
+  technologiesLoading: PropTypes.bool,
+  technologiesError: PropTypes.bool,
+  technologiesResponse: PropTypes.array,
+  onCreateProject: PropTypes.func,
+  createProjectLoading: PropTypes.bool,
+  createProjectResponse: PropTypes.object,
+  cleanPutProject: PropTypes.func,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  publishprojectpage: makeSelectPublishProjectPage(),
+  technologiesResponse: makeSelectTechnologies(),
+  technologiesLoading: makeSelectTechnologiesLoading(),
+  technologiesError: makeSelectTechnologiesError(),
+  createProjectResponse: makeSelectProject(),
+  createProjectLoading: makeSelectProjectLoading(),
+  createProjectError: makeSelectProjectError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onGetTechnologies: (evt) => {
+      dispatch(getTechnologies(evt));
+    },
+    onCreateProject: (evt) => {
+      dispatch(putProject(evt));
+    },
+    cleanPutProject: (evt) => {
+      dispatch(cleanPutStates(evt));
+    },
   };
 }
 

@@ -44,13 +44,14 @@ function ProjectForm({
                 componentClass="textarea"
                 style={{ height: '150px' }}
                 onChange={handleFieldChange}
+                name="description"
               />
               <FormControl.Feedback />
               {errorsInFields.description && <ControlLabel>{intl.formatMessage(messages.error)}</ControlLabel>}
             </Col>
           </FormGroup>
 
-          <FormGroup validationState={errorsInFields.date ? 'error' : null}>
+          <FormGroup validationState={errorsInFields.deadline ? 'error' : null}>
             <Col sm={12}>
               {'Seleccione la fecha'}
             </Col>
@@ -60,11 +61,11 @@ function ProjectForm({
                 handleDateChange={(selectedDate) => handleDateChange(selectedDate)}
               />
               <FormControl.Feedback />
-              {errorsInFields.date && <ControlLabel>{intl.formatMessage(messages.error)}</ControlLabel>}
+              {errorsInFields.deadline && <ControlLabel>{intl.formatMessage(messages.error)}</ControlLabel>}
             </Col>
           </FormGroup>
 
-          <FormGroup validationState={errorsInFields.technologies ? 'error' : null}>
+          <FormGroup validationState={errorsInFields.technologies_ids ? 'error' : null}>
             <Col sm={12}>
               {'Seleccione la fecha'}
             </Col>
@@ -77,7 +78,7 @@ function ProjectForm({
                 onChange={(val) => handleSelectedTechnologies(val)}
               />
               <FormControl.Feedback />
-              {errorsInFields.technologies && <ControlLabel>{intl.formatMessage(messages.error)}</ControlLabel>}
+              {errorsInFields.technologies_ids && <ControlLabel>{intl.formatMessage(messages.error)}</ControlLabel>}
             </Col>
           </FormGroup>
 

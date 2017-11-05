@@ -5,7 +5,7 @@ import {
   setSessionClient,
   setSessionUid,
 }
-  from 'containers/App/sessionSetters';
+  from 'containers/App/session';
 
 import {
   SESSION_TOKEN,

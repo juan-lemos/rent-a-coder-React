@@ -15,7 +15,7 @@ function registerPageReducer(state = initialState, action) {
       return state;
     case PROFILE_SUCCESS:
       return state
-        .set('userData', action.content.body);
+        .set('userData', action.content);
     default:
       return state;
   }

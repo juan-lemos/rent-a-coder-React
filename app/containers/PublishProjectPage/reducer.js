@@ -19,6 +19,8 @@ const initialState = fromJS({
   responsePutProject: null,
 });
 
+const modifiedContent = [];
+
 function loginPageReducer(state = initialState, action) {
   switch (action.type) {
     case GET_TECHNOLOGIES:
@@ -27,9 +29,13 @@ function loginPageReducer(state = initialState, action) {
         .set('errorTechnologies', false)
         .set('responseTechnologies', null);
     case GET_TECHNOLOGIES_SUCCESS:
+      action.content.forEach((element) => {
+        modifiedContent.push({ value: element.id, label: element.name });
+      }
+      );
       return state
         .set('loadingTechnologies', false)
-        .set('responseTechnologies', action.content);
+        .set('responseTechnologies', modifiedContent);
     case GET_TECHNOLOGIES_ERROR:
       return state
         .set('loadingTechnologies', false)

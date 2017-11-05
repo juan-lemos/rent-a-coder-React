@@ -8,11 +8,11 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
 
   create: {
-    id: 'app.components.RegisterComponents.create',
+    id: 'app.components.RegisterForm.RegisterComponents.create',
     defaultMessage: 'Crear',
   },
   error: {
-    id: 'app.components.RegisterComponents.error',
+    id: 'app.components.RegisterForm.RegisterComponents.error',
     defaultMessage: 'Error',
   },
 });

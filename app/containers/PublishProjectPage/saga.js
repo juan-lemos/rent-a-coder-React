@@ -11,7 +11,7 @@ import {
 import { GET_TECHNOLOGIES, PUT_PROJECT } from './constants';
 
 export function* getTechnologies() {
-  const loginReference = 'https://demo5295711.mockable.io/technologies';
+  const loginReference = 'https://rent-a-coder-api.herokuapp.com/technologies';
   const requestHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',

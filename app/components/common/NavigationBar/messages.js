@@ -7,19 +7,19 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   pageName: {
-    id: 'app.components.NavigationBar.pageName',
+    id: 'app.components.common.NavigationBar.pageName',
     defaultMessage: 'Rent a coder',
   },
   profile: {
-    id: 'app.components.NavigationBar.profile',
+    id: 'app.components.common.NavigationBar.profile',
     defaultMessage: 'Profile',
   },
   login: {
-    id: 'app.components.NavigationBar.login',
+    id: 'app.components.common.NavigationBar.login',
     defaultMessage: 'Login',
   },
   publish: {
-    id: 'app.components.NavigationBar.publish',
+    id: 'app.components.common.NavigationBar.publish',
     defaultMessage: 'Publish',
   },
 });

@@ -1,4 +1,4 @@
-import request from 'utils/requestHeaderBody';
+import request from 'utils/request';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { getSessionToken, getSessionClient, getSessionUid } from 'containers/App/session';
 import { SESSION_TOKEN, SESSION_CLIENT, SESSION_UID } from 'containers/App/constants';
@@ -24,8 +24,7 @@ export function* profileGet() {
 
     yield put(profileLoaded(response));
   } catch (err) {
-    const error = yield Promise.resolve(err);
-    yield put(profileError(error));
+    yield put(profileError(err));
   }
 }
 

@@ -14,26 +14,42 @@ const header = (name, deadline, isOpen) => (
   </span >
 );
 
+const createPanels = (projects, currentOpenProject) =>
+  (projects.map((project, i) => {
+    const id = `panelProject${i}`;
+    return (
+      <Panel key={id} header={header(project.name, project.deadline, id === currentOpenProject)} eventKey={id}>
+        <Body
+          tags={['sdfs', 'dfsdf', 'dfsdf']}
+          description={project.description}
+          employerName={project.owner.name}
+          starts={project.owner.owner_score}
+        />
+      </Panel>
+    );
+  }));
+
 
 class ListPanels extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    const projectsPanels = this.props.projects.map((project, i) => {
-      const id = `panelProject${i}`;
-      return (
-        <Panel key={id} header={header(project.name, project.deadline, false)} eventKey={id}>
-          <Body
-            tags={['sdfs', 'dfsdf', 'dfsdf']}
-            description={project.description}
-            employerName={project.owner.name}
-            starts={project.owner.owner_score}
-          />
-        </Panel>
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentOpenProject: '',
+    };
+  }
+
+  onProjectOpen(event) {
+    if (this.state.currentOpenProject === event) {
+      this.setState({ currentOpenProject: '' });
+    } else {
+      this.setState({ currentOpenProject: event });
     }
-    );
+  }
+
+  render() {
     return (
-      <Accordion >
-        {projectsPanels}
+      <Accordion onSelect={(e) => this.onProjectOpen(e)} >
+        {createPanels(this.props.projects, this.state.currentOpenProject)}
       </Accordion>
     );
   }

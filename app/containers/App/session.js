@@ -16,3 +16,15 @@ export function setSessionClient(client) {
 export function setSessionUid(uid) {
   sessionStorage.setItem(`${SESSION_UID}`, uid);
 }
+
+export function getSessionToken() {
+  return sessionStorage.getItem(SESSION_TOKEN);
+}
+
+export function getSessionClient() {
+  return sessionStorage.getItem(SESSION_CLIENT);
+}
+
+export function getSessionUid() {
+  return sessionStorage.getItem(SESSION_UID);
+}

@@ -8,7 +8,7 @@ function BodyPanel({
   employerName,
   starts,
   tags,
-  handleOffer }) {
+  handleOfferProject }) {
   const tagsRender = tags.map((element, i) => {
     const keyTag = `tag${i}`;
     return (
@@ -36,7 +36,7 @@ function BodyPanel({
             {employerName}
           </span>
           <ReactStars count={5} value={starts} className="rating-container" edit={false} size={28} />
-          <Button onClick={() => handleOffer()}>Ofertar</Button>
+          <Button onClick={() => handleOfferProject()}>Ofertar</Button>
         </Col>
       </Row>
     </div>
@@ -48,7 +48,7 @@ BodyPanel.propTypes = {
   employerName: PropTypes.string,
   starts: PropTypes.number,
   tags: PropTypes.array,
-  handleOffer: PropTypes.func,
+  handleOfferProject: PropTypes.func,
 };
 
 export default BodyPanel;

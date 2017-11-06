@@ -24,10 +24,36 @@ import {
 } from './actions';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorsInFields: {
+        cost: false,
+        estimated_time: false,
+      },
+      selectedProjectOffer: {},
+      showModalOffer: false,
+    };
+  }
 
   componentWillMount() {
     this.props.onGetProjects();
+  }
+
+  handleOfferProject(project) {
+    this.setState({
+      selectedProjectOffer: project,
+      showModalOffer: true,
+    });
+  }
+
+  handleCloseModal(offer) {
+    this.setState({ showModalOffer: false });
+    if (offer !== undefined) {
+      const offerToSend = offer;
+      offerToSend.project_id = this.state.selectedProjectOffer.id;
+      // send offer
+    }
   }
 
   render() {
@@ -38,7 +64,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       renderList = <div>Error Loading</div>;
     } else if (this.props.projectsResponse != null) {
       renderList = (
-        <ListPanels projects={this.props.projectsResponse.projects} />
+        <ListPanels
+          handleOfferProject={(project) => this.handleOfferProject(project)}
+          projects={this.props.projectsResponse.projects}
+        />
       );
     }
     return (
@@ -49,7 +78,12 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         </Helmet>
         <div>
           {renderList}
-          <OfferModal />
+          <OfferModal
+            show={this.state.showModalOffer}
+            errorsInFields={this.state.errorsInFields}
+            handleClose={(offer) => this.handleCloseModal(offer)}
+            projectName={this.state.selectedProjectOffer.name}
+          />
         </div>
       </div>
     );

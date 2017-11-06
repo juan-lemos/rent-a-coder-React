@@ -14,7 +14,7 @@ const header = (name, deadline, isOpen) => (
   </span >
 );
 
-const createPanels = (projects, currentOpenProject) =>
+const createPanels = (projects, currentOpenProject, handleOfferProject) =>
   (projects.map((project) => {
     const id = project.id;
     return (
@@ -24,6 +24,7 @@ const createPanels = (projects, currentOpenProject) =>
           description={project.description}
           employerName={project.owner.name}
           starts={project.owner.owner_score}
+          handleOfferProject={() => handleOfferProject(project)}
         />
       </Panel>
     );
@@ -34,15 +35,15 @@ class ListPanels extends React.PureComponent { // eslint-disable-line react/pref
   constructor(props) {
     super(props);
     this.state = {
-      currentOpenProject: '',
+      currentOpenProjectId: '',
     };
   }
 
   onProjectOpen(event) {
-    if (this.state.currentOpenProject === event) {
-      this.setState({ currentOpenProject: '' });
+    if (this.state.currentOpenProjectId === event) {
+      this.setState({ currentOpenProjectId: '' });
     } else {
-      this.setState({ currentOpenProject: event });
+      this.setState({ currentOpenProjectId: event });
     }
   }
 
@@ -58,7 +59,7 @@ class ListPanels extends React.PureComponent { // eslint-disable-line react/pref
     return (
       <div>
         <Accordion onSelect={(e) => this.onProjectOpen(e)} >
-          {createPanels(this.props.projects, this.state.currentOpenProject)}
+          {createPanels(this.props.projects, this.state.currentOpenProjectId, this.props.handleOfferProject)}
         </Accordion>
       </div>
     );
@@ -67,6 +68,7 @@ class ListPanels extends React.PureComponent { // eslint-disable-line react/pref
 
 ListPanels.propTypes = {
   projects: PropTypes.array,
+  handleOfferProject: PropTypes.func,
 };
 
 export default ListPanels;

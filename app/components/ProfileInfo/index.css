@@ -1,0 +1,19 @@
+.user-info {
+  margin-bottom: 35px;
+}
+
+.user-info:last-child {
+  margin-top: 25px;
+}
+
+.user-name {
+  margin-bottom: 2px;
+}
+
+.rating-title {
+  margin-bottom: 0px;
+}
+
+.rating-container {
+  display: inline-block;
+}

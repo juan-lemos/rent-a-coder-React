@@ -1,23 +1,24 @@
-/*
- *
- * ProfilePage reducer
- *
- */
-
 import { fromJS } from 'immutable';
+
 import {
-  DEFAULT_ACTION,
+  PROFILE,
+  PROFILE_SUCCESS,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  userData: {},
+});
 
-function profilePageReducer(state = initialState, action) {
+function registerPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case PROFILE:
       return state;
+    case PROFILE_SUCCESS:
+      return state
+        .set('userData', action.content.user);
     default:
       return state;
   }
 }
 
-export default profilePageReducer;
+export default registerPageReducer;

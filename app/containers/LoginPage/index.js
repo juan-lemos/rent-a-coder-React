@@ -17,6 +17,7 @@ import {
 import reducer from './reducer';
 import { login } from './actions';
 import saga from './saga';
+import Logo from 'images/rent-a-coder-logo.png';
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -54,8 +55,8 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         </Helmet>
         <div style={{ maxWidth: '300px', margin: 'auto' }}>
           <LoginForm
-            logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-            errorInLogin={this.props.loginError}
+            logoUrl={Logo}
+            errorInLogin={this.state.errorInLogin}
             handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
             handleSignInClick={() => this.handleSignInClick()}
           />

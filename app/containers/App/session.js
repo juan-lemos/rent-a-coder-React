@@ -6,15 +6,15 @@ import {
   from './constants';
 
 export function setSessionToken(token) {
-  sessionStorage.setItem(`${SESSION_TOKEN}`, token);
+  sessionStorage.setItem(SESSION_TOKEN, token);
 }
 
 export function setSessionClient(client) {
-  sessionStorage.setItem(`${SESSION_CLIENT}`, client);
+  sessionStorage.setItem(SESSION_CLIENT, client);
 }
 
 export function setSessionUid(uid) {
-  sessionStorage.setItem(`${SESSION_UID}`, uid);
+  sessionStorage.setItem(SESSION_UID, uid);
 }
 
 export function getSessionToken() {

@@ -50,7 +50,7 @@ ProfileInfo.propTypes = {
   contractorRating: PropTypes.number,
   hiredRating: PropTypes.number,
   email: PropTypes.string,
-  phone: PropTypes.string,
+  phone: PropTypes.number,
   website: PropTypes.string,
   city: PropTypes.string,
   country: PropTypes.string,

@@ -9,7 +9,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import ProfileInfo from 'components/ProfileInfo';
 import { profile } from './actions';
-import { makeSelectProfile, makeSelectProfileError } from './selectors';
+import { makeSelectUserData, makeSelectProfileError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import './index.css';
@@ -20,67 +20,76 @@ export class ProfilePage extends React.PureComponent {
     this.props.onCreate({ ...this.values });
   }
 
-  profileInstance = (
-    <Grid>
-      <Row>
-        <ProfileInfo
-          name="John Doe"
-          username="johndoe"
-          gravatarURL="https://secure.gravatar.com/avatar/0002582f53c86ce642eec439f7bda89"
-          contractorRating={3}
-          hiredRating={2}
-          email="john.doe@mail.com"
-          phone="12345678"
-          website="john.doe.com"
-          city="Johndon"
-          country="Doeland"
-        />
-        <Col sm={12} md={9} lg={9}>
-          <Tabs defaultActiveKey={1} id="projects-tabs">
-            <Tab eventKey={1} tabClassName="tab-projects" title="Publicados">
-              <Accordion onSelect={this.handle}>
-                <Panel header="Collapsible Group Item #1" eventKey="1">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
-                </Panel>
-                <Panel header="Collapsible Group Item #2" eventKey="2">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
-                </Panel>
-                <Panel header="Collapsible Group Item #3" eventKey="3">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
-                </Panel>
-              </Accordion>
-            </Tab>
-            <Tab eventKey={2} tabClassName="tab-projects" title="Postulados">
-              <Accordion onSelect={this.handle}>
-                <Panel header="Collapsible Group Item #1" eventKey="1">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
-                </Panel>
-                <Panel header="Collapsible Group Item #2" eventKey="2">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
-                </Panel>
-              </Accordion>
-            </Tab>
-          </Tabs>
-        </Col>
-      </Row>
-    </Grid>
-  );
-
   render() {
+    const {
+      developer_score: developerScore,
+      owner_score: ownerScore,
+      gravatar_url: gravatarURL,
+      // uploaded_projects: uploadedProjects,
+      city,
+      country,
+      email,
+      name,
+      nickname,
+      tel,
+      web,
+    } = this.props.userData;
+
     return (
-      <div>
-        {this.profileInstance}
-      </div>
+      <Grid>
+        <Row>
+          <ProfileInfo
+            name={name}
+            username={nickname}
+            gravatarURL={gravatarURL}
+            contractorRating={ownerScore}
+            hiredRating={developerScore}
+            email={email}
+            phone={tel}
+            website={web}
+            city={city}
+            country={country}
+          />
+          <Col sm={12} md={9} lg={9}>
+            <Tabs defaultActiveKey={1} id="projects-tabs">
+              <Tab eventKey={1} tabClassName="tab-projects" title="Publicados">
+                <Accordion onSelect={this.handle}>
+                  <Panel header="Collapsible Group Item #1" eventKey="1">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
+                  </Panel>
+                  <Panel header="Collapsible Group Item #2" eventKey="2">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
+                  </Panel>
+                  <Panel header="Collapsible Group Item #3" eventKey="3">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
+                  </Panel>
+                </Accordion>
+              </Tab>
+              <Tab eventKey={2} tabClassName="tab-projects" title="Postulados">
+                <Accordion onSelect={this.handle}>
+                  <Panel header="Collapsible Group Item #1" eventKey="1">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
+                  </Panel>
+                  <Panel header="Collapsible Group Item #2" eventKey="2">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably havent heard of them accusamus labore sustainable VHS.
+                  </Panel>
+                </Accordion>
+              </Tab>
+            </Tabs>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
 
 ProfilePage.propTypes = {
   onCreate: PropTypes.func.isRequired,
+  userData: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  profileResponse: makeSelectProfile(),
+  userData: makeSelectUserData(),
   profileError: makeSelectProfileError(),
 });
 

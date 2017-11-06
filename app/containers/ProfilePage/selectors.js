@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 const selectProfilePageDomain = (state) => state.get('profilePage');
 
-const makeSelectProfile = () =>
+const makeSelectUserData = () =>
   createSelector(selectProfilePageDomain, (substate) =>
-    substate.get('responseProfile')
+    substate.get('userData')
   );
 
 const makeSelectProfileError = () =>
@@ -13,6 +13,6 @@ const makeSelectProfileError = () =>
   );
 
 export {
-  makeSelectProfile,
+  makeSelectUserData,
   makeSelectProfileError,
 };

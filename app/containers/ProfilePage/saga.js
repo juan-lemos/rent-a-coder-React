@@ -21,7 +21,6 @@ export function* profileGet() {
       method: 'GET',
       headers: requestHeaders,
     });
-
     yield put(profileLoaded(response));
   } catch (err) {
     yield put(profileError(err));

@@ -27,18 +27,20 @@ function NavigationBar() {
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <NavItem eventKey={1} href="#">
-            <FormattedMessage {...messages.publish} />
-          </NavItem>
+          <LinkContainer to="/publishProject">
+            <NavItem eventKey={1}>
+              <FormattedMessage {...messages.publish} />
+            </NavItem>
+          </LinkContainer>
         </Nav>
         <Nav pullRight>
           <LinkContainer to="/login">
-            <NavItem eventKey={1}>
+            <NavItem eventKey={2}>
               <FormattedMessage {...messages.login} />
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/profile">
-            <NavItem eventKey={2}>
+            <NavItem eventKey={3}>
               <FormattedMessage {...messages.profile} />
             </NavItem>
           </LinkContainer>

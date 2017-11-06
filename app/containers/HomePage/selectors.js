@@ -15,7 +15,7 @@ createSelector(selectHomePageDomain, (substate) =>
   substate.get('errorProjects')
 );
 
-const makeSelectProject = () =>
+const makeSelectOffer = () =>
 createSelector(selectHomePageDomain, (substate) =>
   substate.get('responsePutOffer')
 );
@@ -32,7 +32,7 @@ export {
   makeSelectProjects,
   makeSelectProjectsLoading,
   makeSelectProjectsError,
-  makeSelectProject,
+  makeSelectOffer,
   makeSelectOfferLoading,
   makeSelectOfferError,
 };

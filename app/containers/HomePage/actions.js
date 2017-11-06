@@ -5,6 +5,7 @@ import {
   PUT_OFFER,
   PUT_OFFER_SUCCESS,
   PUT_OFFER_ERROR,
+  CLEAN_PUT_OFFER,
 } from './constants';
 
 export function getProjects() {
@@ -45,5 +46,11 @@ export function putOfferError(error) {
   return {
     type: PUT_OFFER_ERROR,
     error,
+  };
+}
+
+export function cleanPutOffer() {
+  return {
+    type: CLEAN_PUT_OFFER,
   };
 }

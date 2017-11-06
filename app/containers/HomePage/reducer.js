@@ -6,6 +6,7 @@ import {
   PUT_OFFER,
   PUT_OFFER_SUCCESS,
   PUT_OFFER_ERROR,
+  CLEAN_PUT_OFFER,
 } from './constants';
 
 const initialState = fromJS({
@@ -45,6 +46,11 @@ function homePageReducer(state = initialState, action) {
       return state
         .set('loadingPutOffer', false)
         .set('errorPutOffer', action.error);
+    case CLEAN_PUT_OFFER:
+      return state
+        .set('loadingPutProject', false)
+        .set('errorPutProject', null)
+        .set('responsePutProject', null);
     default:
       return state;
   }

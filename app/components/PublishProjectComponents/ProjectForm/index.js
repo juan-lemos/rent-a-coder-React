@@ -67,7 +67,7 @@ function ProjectForm({
 
           <FormGroup validationState={errorsInFields.technologies_ids ? 'error' : null}>
             <Col sm={12}>
-              {'Seleccione la fecha'}
+              {'Seleccione las tecnologías'}
             </Col>
             <Col sm={12}>
               <Select

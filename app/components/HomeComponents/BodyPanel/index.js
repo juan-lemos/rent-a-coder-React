@@ -24,7 +24,7 @@ function BodyPanel({
       <Row>
         <Col xs={12} sm={6}>
           {description}
-          <div style={{ fontWeight: 'bold' }}> Tags: </div>
+          <div style={{ fontWeight: 'bold' }}> Tecnologías: </div>
           <div>
             {tagsRender}
           </div>
@@ -37,8 +37,6 @@ function BodyPanel({
           </span>
           <ReactStars count={5} value={starts} className="rating-container" edit={false} size={28} />
           <Button onClick={() => handleOffer()}>Ofertar</Button>
-
-
         </Col>
       </Row>
     </div>

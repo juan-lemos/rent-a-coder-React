@@ -15,8 +15,8 @@ const header = (name, deadline, isOpen) => (
 );
 
 const createPanels = (projects, currentOpenProject) =>
-  (projects.map((project, i) => {
-    const id = `panelProject${i}`;
+  (projects.map((project) => {
+    const id = project.id;
     return (
       <Panel key={id} header={header(project.name, project.deadline, id === currentOpenProject)} eventKey={id}>
         <Body
@@ -46,11 +46,21 @@ class ListPanels extends React.PureComponent { // eslint-disable-line react/pref
     }
   }
 
+  close() {
+    this.setState({ showModal: false });
+  }
+
+  open() {
+    this.setState({ showModal: true });
+  }
+
   render() {
     return (
-      <Accordion onSelect={(e) => this.onProjectOpen(e)} >
-        {createPanels(this.props.projects, this.state.currentOpenProject)}
-      </Accordion>
+      <div>
+        <Accordion onSelect={(e) => this.onProjectOpen(e)} >
+          {createPanels(this.props.projects, this.state.currentOpenProject)}
+        </Accordion>
+      </div>
     );
   }
 }

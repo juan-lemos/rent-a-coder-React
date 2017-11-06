@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import ListPanels from 'components/HomeComponents/ListPanels';
+import OfferModal from 'components/HomeComponents/OfferModal';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
@@ -48,6 +49,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         </Helmet>
         <div>
           {renderList}
+          <OfferModal />
         </div>
       </div>
     );

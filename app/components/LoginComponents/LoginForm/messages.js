@@ -22,4 +22,8 @@ export default defineMessages({
     id: 'app.components.LoginComponents.LoginForm.error',
     defaultMessage: 'Error verifique su contraseña o email.',
   },
+  signUp: {
+    id: 'app.components.LoginComponents.LoginForm.signUp',
+    defaultMessage: 'Registrarse',
+  },
 });

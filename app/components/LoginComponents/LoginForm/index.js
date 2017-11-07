@@ -1,12 +1,5 @@
-/**
-*
-* LoginForm
-*
-*/
-
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 
 import { Button, Form, FormGroup, Col, FormControl, Well, HelpBlock } from 'react-bootstrap';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
@@ -16,6 +9,7 @@ function LoginForm({
    logoUrl,
   handleFieldChange,
   handleSignInClick,
+  handleClickRegister,
   errorInLogin,
   intl }) {
   return (
@@ -72,6 +66,12 @@ function LoginForm({
             </FormGroup>
           }
         </Form>
+        <button
+          style={{ color: 'blue' }}
+          onClick={() => handleClickRegister()}
+        >
+          {intl.formatMessage(messages.signUp)}
+        </button>
       </Well>
     </div>
   );
@@ -82,6 +82,7 @@ LoginForm.propTypes = {
   errorInLogin: PropTypes.bool,
   handleFieldChange: PropTypes.func,
   handleSignInClick: PropTypes.func,
+  handleClickRegister: PropTypes.func,
   intl: intlShape.isRequired,
 };
 

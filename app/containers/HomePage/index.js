@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Grid } from 'react-bootstrap';
 
 import ListPanels from 'components/HomeComponents/ListPanels';
 import OfferModal from 'components/HomeComponents/OfferModal';
@@ -101,11 +102,12 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       );
     }
     return (
-      <div>
+      <Grid>
         <Helmet>
           <title>Home</title>
           <meta name="description" content="Description of Home" />
         </Helmet>
+        <h1>{'Proyectos sin ofertar:'}</h1>
         {this.props.offerLoading ?
           <LoadingIndicator /> :
           (<div>
@@ -119,7 +121,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           </div>
           )
         }
-      </div>
+      </Grid>
     );
   }
 }

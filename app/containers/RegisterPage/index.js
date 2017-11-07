@@ -67,10 +67,10 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       let propertyName;
       let property;
       const properties = this.state.formFields;
-      for (property in properties) {// eslint-disable-line 
+      for (property in properties) {// eslint-disable-line
         properties[property].error = false;
       }
-      for (propertyName in nextProps.registerError.errors) {// eslint-disable-line 
+      for (propertyName in nextProps.registerError.errors) {// eslint-disable-line
         if (properties[propertyName] !== undefined) {
           properties[propertyName].error = true;
         }

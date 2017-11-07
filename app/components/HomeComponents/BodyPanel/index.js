@@ -30,12 +30,14 @@ function BodyPanel({
           </div>
         </Col>
         <Col xs={12} sm={6}>
-          <span
+          <div
             style={{ fontWeight: 'bold', fontSize: '1.2em' }}
           >
             {employerName}
-          </span>
-          <ReactStars count={5} value={starts} className="rating-container" edit={false} size={28} />
+          </div>
+          <div>
+            <ReactStars count={5} value={starts} className="rating-container" edit={false} size={28} />
+          </div>
           <Button onClick={() => handleOfferProject()}>Ofertar</Button>
         </Col>
       </Row>

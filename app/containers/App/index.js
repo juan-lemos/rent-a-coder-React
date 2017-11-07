@@ -15,7 +15,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomePage from 'containers/HomePage';
-import ProfilePage from 'containers/ProfilePage/Loadable';
+import ProfilePage from 'containers/ProfilePage';
 import LoginPage from 'containers/LoginPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationBar from 'components/common/NavigationBar';

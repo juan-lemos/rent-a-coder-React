@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import LoginForm from 'components/LoginComponents/LoginForm';
-
+import Logo from 'images/rent-a-coder-logo.png';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import {
@@ -17,6 +17,7 @@ import {
 import reducer from './reducer';
 import { login } from './actions';
 import saga from './saga';
+
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -54,8 +55,8 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         </Helmet>
         <div style={{ maxWidth: '300px', margin: 'auto' }}>
           <LoginForm
-            logoUrl={'http://ucu.edu.uy/sites/all/themes/univer/logo.png'}
-            errorInLogin={this.props.loginError}
+            logoUrl={Logo}
+            errorInLogin={this.state.errorInLogin}
             handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
             handleSignInClick={() => this.handleSignInClick()}
           />
@@ -70,7 +71,6 @@ LoginPage.propTypes = {
   onLogin: PropTypes.func,
   loginResponse: PropTypes.object,
   loginLoading: PropTypes.bool,
-  loginError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

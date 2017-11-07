@@ -60,6 +60,7 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
 
   componentWillMount() {
     this.props.onGetTechnologies();
+    this.handleDateChange(this.state.startDate);
   }
 
   componentWillReceiveProps(nextProps) {

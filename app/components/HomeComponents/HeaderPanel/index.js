@@ -20,7 +20,7 @@ const ContainerNameAndDeadLine = styled.span`
 const NameItem = styled.span`
   color: #000;
   margin-right: 20px;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
 `;
 

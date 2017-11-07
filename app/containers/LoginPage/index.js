@@ -46,6 +46,10 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     this.setState(change);
   }
 
+  handleClickRegister() {
+    this.props.history.push('/register');
+  }
+
   render() {
     return (
       <div>
@@ -59,6 +63,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
             errorInLogin={this.state.errorInLogin}
             handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
             handleSignInClick={() => this.handleSignInClick()}
+            handleClickRegister={() => this.handleClickRegister()}
           />
         </div>
       </div>

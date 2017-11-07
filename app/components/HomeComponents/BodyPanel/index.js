@@ -13,7 +13,7 @@ function BodyPanel({
     const keyTag = `tag${i}`;
     return (
       <span key={keyTag} style={{ marginRight: '5px' }}>
-        <Label>{element}</Label>
+        <Label>{element.name}</Label>
       </span>
     );
   }
@@ -26,7 +26,7 @@ function BodyPanel({
           {description}
           <div style={{ fontWeight: 'bold' }}> Tecnologías: </div>
           <div>
-            {tagsRender}
+            {tags.length > 0 ? tagsRender : <span>{'Sin especificar'}</span>}
           </div>
         </Col>
         <Col xs={12} sm={6}>

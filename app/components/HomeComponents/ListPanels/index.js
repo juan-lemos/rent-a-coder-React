@@ -20,7 +20,7 @@ const createPanels = (projects, currentOpenProject, handleOfferProject) =>
     return (
       <Panel key={id} header={header(project.name, project.deadline, id === currentOpenProject)} eventKey={id}>
         <Body
-          tags={['sdfs', 'dfsdf', 'dfsdf']}
+          tags={project.technologies}
           description={project.description}
           employerName={project.owner.name}
           starts={project.owner.owner_score}

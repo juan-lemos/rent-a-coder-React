@@ -21,6 +21,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavigationBar from 'components/common/NavigationBar';
 import RegisterPage from 'containers/RegisterPage';
 import PublishProjectPage from 'containers/PublishProjectPage';
+import CandidatesPage from 'containers/CandidatesPage';
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/publishProject" component={PublishProjectPage} />
+        <Route path="/candidates/:proyX" component={CandidatesPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div >

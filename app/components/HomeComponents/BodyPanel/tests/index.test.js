@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import { HomePage } from '../index';
+// import BodyPanel from '../index';
 
-describe('<HomePage />', () => {
+describe('<BodyPanel />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

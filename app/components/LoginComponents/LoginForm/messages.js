@@ -7,19 +7,19 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   email: {
-    id: 'app.components.LoginForm.email',
+    id: 'app.components.LoginComponents.LoginForm.email',
     defaultMessage: 'Email',
   },
   password: {
-    id: 'app.components.LoginForm.password',
+    id: 'app.components.LoginComponents.LoginForm.password',
     defaultMessage: 'Contraseña',
   },
   singin: {
-    id: 'app.components.LoginForm.singin',
+    id: 'app.components.LoginComponents.LoginForm.singin',
     defaultMessage: 'Ingresar',
   },
   error: {
-    id: 'app.components.LoginForm.error',
+    id: 'app.components.LoginComponents.LoginForm.error',
     defaultMessage: 'Error verifique su contraseña o email.',
   },
 });

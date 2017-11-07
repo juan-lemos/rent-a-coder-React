@@ -7,15 +7,15 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.ProjectForm.header',
+    id: 'app.components.PublishProjectComponents.ProjectForm.header',
     defaultMessage: 'This is the ProjectForm component !',
   },
   error: {
-    id: 'app.components.RegisterComponents.error',
+    id: 'app.components.PublishProjectComponents.ProjectForm.error',
     defaultMessage: 'Error',
   },
   create: {
-    id: 'app.components.RegisterComponents.create',
+    id: 'app.components.PublishProjectComponents.ProjectForm.create',
     defaultMessage: 'Crear',
   },
 });

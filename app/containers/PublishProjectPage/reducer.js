@@ -29,7 +29,7 @@ function loginPageReducer(state = initialState, action) {
         .set('errorTechnologies', false)
         .set('responseTechnologies', null);
     case GET_TECHNOLOGIES_SUCCESS:
-      action.content.forEach((element) => {
+      action.content.technologies.forEach((element) => {
         modifiedContent.push({ value: element.id, label: element.name });
       }
       );

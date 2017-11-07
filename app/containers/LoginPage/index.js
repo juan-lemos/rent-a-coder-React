@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import LoginForm from 'components/LoginComponents/LoginForm';
-
+import Logo from 'images/rent-a-coder-logo.png';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import {
@@ -17,7 +17,7 @@ import {
 import reducer from './reducer';
 import { login } from './actions';
 import saga from './saga';
-import Logo from 'images/rent-a-coder-logo.png';
+
 
 export class LoginPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -71,7 +71,6 @@ LoginPage.propTypes = {
   onLogin: PropTypes.func,
   loginResponse: PropTypes.object,
   loginLoading: PropTypes.bool,
-  loginError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

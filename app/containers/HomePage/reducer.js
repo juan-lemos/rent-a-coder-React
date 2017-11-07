@@ -48,9 +48,9 @@ function homePageReducer(state = initialState, action) {
         .set('errorPutOffer', action.error);
     case CLEAN_PUT_OFFER:
       return state
-        .set('loadingPutProject', false)
-        .set('errorPutProject', null)
-        .set('responsePutProject', null);
+        .set('loadingPutOffer', false)
+        .set('errorPutOffer', null)
+        .set('responsePutOffer', null);
     default:
       return state;
   }

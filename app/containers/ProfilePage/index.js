@@ -27,6 +27,7 @@ export class ProfilePage extends React.PureComponent {
       owner_score: ownerScore,
       gravatar_url: gravatarURL,
       uploaded_projects: uploadedProjects,
+      projects_as_candidate: projectsAsCandidate,
       city,
       country,
       email,
@@ -54,7 +55,7 @@ export class ProfilePage extends React.PureComponent {
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">
               <ProjectsTab eventKey={1} title="Publicados" projects={uploadedProjects} />
-              <ProjectsTab eventKey={2} title="Postulados" projects={uploadedProjects} />
+              <ProjectsTab eventKey={2} title="Postulados" projects={projectsAsCandidate} />
             </Tabs>
           </Col>
         </Row>

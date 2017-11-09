@@ -25,7 +25,6 @@ export class ProfilePage extends React.PureComponent {
       developer_score: developerScore,
       owner_score: ownerScore,
       gravatar_url: gravatarURL,
-      // uploaded_projects: uploadedProjects,
       city,
       country,
       email,

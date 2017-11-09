@@ -1,15 +1,51 @@
-/*
- *
- * CandidatesPage actions
- *
- */
-
 import {
-  DEFAULT_ACTION,
+  GET_CANDIDATES,
+  GET_CANDIDATES_SUCCESS,
+  GET_CANDIDATES_ERROR,
+  PUT_SELECT_CANDIDATE,
+  PUT_SELECT_CADIDATE_SUCCESS,
+  PUT_SELECT_CANDIDATE_ERROR,
 } from './constants';
 
-export function defaultAction() {
+export function getCandidates(content) {
   return {
-    type: DEFAULT_ACTION,
+    type: GET_CANDIDATES,
+    content,
   };
 }
+
+export function getCandidatesLoaded(content) {
+  return {
+    type: GET_CANDIDATES_SUCCESS,
+    content,
+  };
+}
+
+export function getCandidatesError(error) {
+  return {
+    type: GET_CANDIDATES_ERROR,
+    error,
+  };
+}
+
+export function putSelectCandidate(content) {
+  return {
+    type: PUT_SELECT_CANDIDATE,
+    content,
+  };
+}
+
+export function putSelectCandidateLoaded(content) {
+  return {
+    type: PUT_SELECT_CADIDATE_SUCCESS,
+    content,
+  };
+}
+
+export function putSelectCandidateError(error) {
+  return {
+    type: PUT_SELECT_CANDIDATE_ERROR,
+    error,
+  };
+}
+

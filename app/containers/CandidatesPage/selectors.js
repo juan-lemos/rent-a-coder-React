@@ -1,25 +1,39 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the candidatesPage state domain
- */
 const selectCandidatesPageDomain = (state) => state.get('candidatesPage');
 
-/**
- * Other specific selectors
- */
 
-
-/**
- * Default selector used by CandidatesPage
- */
-
-const makeSelectCandidatesPage = () => createSelector(
-  selectCandidatesPageDomain,
-  (substate) => substate.toJS()
+const makeSelectCandidates = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('responseCandidates')
+);
+const makeSelectCandidatesLoading = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('loadingCandidates')
+);
+const makeSelectCandidatesError = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('errorCandidates')
 );
 
-export default makeSelectCandidatesPage;
+const makeSelectSelectCandidate = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('responsePutCandidate')
+);
+const makeSelectSelectCandidateLoading = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('loadingPutCandidate')
+);
+const makeSelectSelectCandidateError = () =>
+createSelector(selectCandidatesPageDomain, (substate) =>
+  substate.get('errorPutCandidate')
+);
+
 export {
-  selectCandidatesPageDomain,
+  makeSelectCandidates,
+  makeSelectCandidatesLoading,
+  makeSelectCandidatesError,
+  makeSelectSelectCandidate,
+  makeSelectSelectCandidateLoading,
+  makeSelectSelectCandidateError,
 };

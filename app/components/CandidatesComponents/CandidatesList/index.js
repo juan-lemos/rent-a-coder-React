@@ -3,16 +3,16 @@ import { ListGroup } from 'react-bootstrap';
 import CandidatesListItem from 'components/CandidatesComponents/CandidateListItem';
 import PropTypes from 'prop-types';
 
-function CandidatesList({ candidates, viewCandidateProfile, selectCandidate }) {
+function CandidatesList({ offers, viewCandidateProfile, selectCandidate }) {
   return (
     <ListGroup>
-      {candidates.map(() => (
+      {offers.map((offer) => (
         <CandidatesListItem
-          candidateName={'Juan'}
-          stars={3}
-          estimatedPrice={232}
-          estimatedTime={30}
-          candidateId={42352352}
+          candidateName={offer.candidate.name}
+          stars={offer.candidate.developer_score}
+          estimatedPrice={offer.cost}
+          estimatedTime={offer.estimated_time}
+          candidateId={offer.candidate.id}
           selectCandidate={() => viewCandidateProfile()}
           viewCandidateProfile={() => selectCandidate()}
         />
@@ -22,7 +22,7 @@ function CandidatesList({ candidates, viewCandidateProfile, selectCandidate }) {
 }
 
 CandidatesList.propTypes = {
-  candidates: PropTypes.array,
+  offers: PropTypes.array,
   viewCandidateProfile: PropTypes.func,
   selectCandidate: PropTypes.func,
 };

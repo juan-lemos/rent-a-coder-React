@@ -9,20 +9,31 @@ import { Grid } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import CandidatesComponents from 'components/CandidatesComponents/CandidatesList';
-import makeSelectCandidatesPage from './selectors';
+import {
+  makeSelectCandidates,
+  makeSelectCandidatesLoading,
+  makeSelectCandidatesError,
+  makeSelectSelectCandidate,
+  makeSelectSelectCandidateError,
+  makeSelectSelectCandidateLoading,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+
+import {
+  getCandidates,
+  putSelectCandidate,
+} from './actions';
 
 
 export class CandidatesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  mistivar = 32;
   handleSelectCandidate(candidateId) {
-    console.log(`selected candidate ${candidateId} ${this.mistivar}`);
+    console.log(`selected candidate ${candidateId}`);
   }
 
   handleViewCandidateProfile(candidateId) {
-    console.log(`view profile ${candidateId} ${this.mistivar}`);
+    console.log(`view profile ${candidateId}`);
   }
 
   render() {
@@ -34,7 +45,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
         </Helmet>
         <h1>{'Candidatos:'}</h1>
         <CandidatesComponents
-          candidates={[]}
+          offers={[1, 2]}
           viewCandidateProfile={(id) => this.handleViewCandidateProfile(id)}
           selectCandidate={(id) => this.handleSelectCandidate(id)}
         />
@@ -53,7 +64,9 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    onGetCandidatesOffers: (evt) => {
+      dispatch(getCandidates(evt));
+    },
   };
 }
 

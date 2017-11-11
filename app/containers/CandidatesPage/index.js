@@ -44,22 +44,22 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
           <meta name="description" content="Description of CandidatesPage" />
         </Helmet>
         <h1>{'Candidatos:'}</h1>
-        <CandidatesComponents
+        {/* <CandidatesComponents
           offers={[1, 2]}
           viewCandidateProfile={(id) => this.handleViewCandidateProfile(id)}
           selectCandidate={(id) => this.handleSelectCandidate(id)}
-        />
+        /> */}
       </Grid>
     );
   }
 }
 
 CandidatesPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  
 };
 
 const mapStateToProps = createStructuredSelector({
-  candidatespage: makeSelectCandidatesPage(),
+  
 });
 
 function mapDispatchToProps(dispatch) {

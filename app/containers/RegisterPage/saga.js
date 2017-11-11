@@ -1,5 +1,7 @@
 import request from 'utils/requestHeaderBody';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
+import { GET_TECHNOLOGIES } from 'containers/App/constants';
+import { getTechnologies } from 'containers/App/saga';
 import { registerLoaded, registerError } from './actions';
 import { REGISTER } from './constants';
 
@@ -26,6 +28,7 @@ export function* registerPut(action) {
 export default function* rootSaga() {
   yield all([
     takeLatest(REGISTER, registerPut),
+    takeLatest(GET_TECHNOLOGIES, getTechnologies),
   ]);
 }
 

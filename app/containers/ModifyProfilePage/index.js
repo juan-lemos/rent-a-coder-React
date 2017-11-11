@@ -1,23 +1,22 @@
-/**
- *
- * ModifyProfilePage
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import styled from 'styled-components';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectModifyProfilePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import messages from './messages';
+
+
+const Container = styled.div`
+max-width : 500px;
+margin : auto;
+`;
 
 export class ModifyProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -27,7 +26,9 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
           <title>ModifyProfilePage</title>
           <meta name="description" content="Description of ModifyProfilePage" />
         </Helmet>
-        <FormattedMessage {...messages.header} />
+        <Container>
+
+        </Container>
       </div>
     );
   }

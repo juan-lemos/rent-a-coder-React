@@ -13,3 +13,7 @@ export const DEFAULT_LOCALE = 'en';
 export const SESSION_TOKEN = 'Access-Token';
 export const SESSION_CLIENT = 'Client';
 export const SESSION_UID = 'Uid';
+
+export const GET_TECHNOLOGIES = 'app/PublishProjectPage/GET_TECHNOLOGIES';
+export const GET_TECHNOLOGIES_SUCCESS = 'app/PublishProjectPage/GET_TECHNOLOGIES_SUCCESS';
+export const GET_TECHNOLOGIES_ERROR = 'app/PublishProjectPage/GET_TECHNOLOGIES_ERROR';

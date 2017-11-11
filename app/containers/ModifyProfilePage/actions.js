@@ -1,6 +1,6 @@
 /*
  *
- * ModifyProfile actions
+ * ModifyProfilePage actions
  *
  */
 

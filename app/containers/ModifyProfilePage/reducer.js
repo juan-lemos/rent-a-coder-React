@@ -1,6 +1,6 @@
 /*
  *
- * ModifyProfile reducer
+ * ModifyProfilePage reducer
  *
  */
 
@@ -11,7 +11,7 @@ import {
 
 const initialState = fromJS({});
 
-function modifyProfileReducer(state = initialState, action) {
+function modifyProfilePageReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -20,4 +20,4 @@ function modifyProfileReducer(state = initialState, action) {
   }
 }
 
-export default modifyProfileReducer;
+export default modifyProfilePageReducer;

@@ -1,6 +1,6 @@
 /**
  *
- * ModifyProfile
+ * ModifyProfilePage
  *
  */
 
@@ -14,18 +14,18 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectModifyProfile from './selectors';
+import makeSelectModifyProfilePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export class ModifyProfile extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class ModifyProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div>
         <Helmet>
-          <title>ModifyProfile</title>
-          <meta name="description" content="Description of ModifyProfile" />
+          <title>ModifyProfilePage</title>
+          <meta name="description" content="Description of ModifyProfilePage" />
         </Helmet>
         <FormattedMessage {...messages.header} />
       </div>
@@ -33,12 +33,12 @@ export class ModifyProfile extends React.PureComponent { // eslint-disable-line 
   }
 }
 
-ModifyProfile.propTypes = {
+ModifyProfilePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  modifyprofile: makeSelectModifyProfile(),
+  modifyprofilepage: makeSelectModifyProfilePage(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -49,11 +49,11 @@ function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'modifyProfile', reducer });
-const withSaga = injectSaga({ key: 'modifyProfile', saga });
+const withReducer = injectReducer({ key: 'modifyProfilePage', reducer });
+const withSaga = injectSaga({ key: 'modifyProfilePage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(ModifyProfile);
+)(ModifyProfilePage);

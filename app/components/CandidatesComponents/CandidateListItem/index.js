@@ -45,7 +45,7 @@ function CandidateListItem({
             {`U$S: ${estimatedPrice}`}
           </Row>
           <Row>
-            {`Diás estimados: ${estimatedTime}`}
+            {`Días estimados: ${estimatedTime}`}
           </Row>
         </Col>
         <Col xs={12} sm={6}>
@@ -66,7 +66,7 @@ function CandidateListItem({
 CandidateListItem.propTypes = {
   candidateName: PropTypes.string,
   stars: PropTypes.number,
-  estimatedPrice: PropTypes.number,
+  estimatedPrice: PropTypes.string,
   estimatedTime: PropTypes.number,
   candidateId: PropTypes.number,
   selectCandidate: PropTypes.func,

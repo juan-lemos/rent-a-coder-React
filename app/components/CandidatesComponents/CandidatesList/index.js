@@ -8,13 +8,14 @@ function CandidatesList({ offers, viewCandidateProfile, selectCandidate }) {
     <ListGroup>
       {offers.map((offer) => (
         <CandidatesListItem
+          key={offer.candidate.id}
           candidateName={offer.candidate.name}
           stars={offer.candidate.developer_score}
           estimatedPrice={offer.cost}
           estimatedTime={offer.estimated_time}
           candidateId={offer.candidate.id}
-          selectCandidate={() => viewCandidateProfile()}
-          viewCandidateProfile={() => selectCandidate()}
+          selectCandidate={(id) => viewCandidateProfile(id)}
+          viewCandidateProfile={(id) => selectCandidate(id)}
         />
       ))}
     </ListGroup>

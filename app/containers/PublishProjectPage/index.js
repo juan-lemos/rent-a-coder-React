@@ -14,7 +14,16 @@ import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
 
 import {
+  makeSelectTechnologies,
+  makeSelectTechnologiesLoading,
+  makeSelectTechnologiesError,
+} from 'containers/App/selectors';
+
+import {
   getTechnologies,
+} from 'containers/App/actions';
+
+import {
   putProject,
   cleanPutStates,
 } from './actions';
@@ -22,9 +31,6 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import {
-  makeSelectTechnologies,
-  makeSelectTechnologiesLoading,
-  makeSelectTechnologiesError,
   makeSelectProject,
   makeSelectProjectLoading,
   makeSelectProjectError,

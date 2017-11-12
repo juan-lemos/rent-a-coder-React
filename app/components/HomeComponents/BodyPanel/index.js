@@ -23,20 +23,22 @@ function BodyPanel({
     <div>
       <Row>
         <Col xs={12} sm={6}>
+          <div style={{ fontWeight: 'bold' }}>{'Descripción:'}</div>
           {description}
-          <div style={{ fontWeight: 'bold' }}> Tecnologías: </div>
+          <div style={{ fontWeight: 'bold', marginTop: '10px' }}>{'Tecnologías:'}</div>
           <div>
             {tags.length > 0 ? tagsRender : <span>{'Sin especificar'}</span>}
           </div>
         </Col>
         <Col xs={12} sm={6}>
+          <div style={{ fontWeight: 'bold', marginTop: '10px' }}>{'Contratante:'}</div>
           <div
-            style={{ fontWeight: 'bold', fontSize: '1.2em' }}
+            style={{ fontSize: '1em' }}
           >
             {employerName}
           </div>
           <div>
-            <ReactStars count={5} value={starts} className="rating-container" edit={false} size={28} />
+            <ReactStars count={5} value={starts} className="rating-container" edit={false} size={18} />
           </div>
           <Button onClick={() => handleOfferProject()}>Ofertar</Button>
         </Col>

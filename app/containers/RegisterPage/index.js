@@ -9,6 +9,16 @@ import styled from 'styled-components';
 import Form from 'components/RegisterComponents/RegisterForm';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+
+import {
+  makeSelectTechnologies,
+  makeSelectTechnologiesLoading,
+  makeSelectTechnologiesError,
+} from 'containers/App/selectors';
+import {
+  getTechnologies,
+} from 'containers/App/actions';
+
 import { register } from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -42,6 +52,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
         tel: fieldObj(false, 'Tel.', 'input'),
         web: fieldObj(false, 'Web', 'input'),
       },
+      selectedTechnologies: [],
     };
     this.values = {
       name: '',
@@ -53,7 +64,12 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       country: '',
       tel: '',
       web: '',
+      technologies: [],
     };
+  }
+
+  componentWillMount() {
+    this.props.onGetTechnologies();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,6 +102,11 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     this.props.onCreate({ ...this.values });
   }
 
+  handleSelectedTechnologies(val) {
+    this.setState({ selectedTechnologies: val });
+    this.values.technologies = val;
+  }
+
   render() {
     // console.log()
     return (
@@ -95,10 +116,14 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
         <RegisterContainer>
+          <h1>{'Registro:'}</h1>
           <Form
             formFields={this.state.formFields}
             handleCreateOnClick={() => this.handleCreateOnClick()}
             handleFieldChange={(event) => this.handleFieldChange(event)}
+            handleSelectedTechnologies={(values) => this.handleSelectedTechnologies(values)}
+            technologies={this.props.technologiesResponse}
+            selectedTechnologies={this.state.selectedTechnologies}
           />
         </RegisterContainer>
       </div>
@@ -111,18 +136,26 @@ RegisterPage.propTypes = {
   registerResponse: PropTypes.object,
   registerLoading: PropTypes.bool,
   history: PropTypes.object,
+  technologiesResponse: PropTypes.array,
+  onGetTechnologies: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   registerResponse: makeSelectRegister(),
   registerLoading: makeSelectRegisterLoading(),
   registerError: makeSelectRegisterError(),
+  technologiesResponse: makeSelectTechnologies(),
+  technologiesLoading: makeSelectTechnologiesLoading(),
+  technologiesError: makeSelectTechnologiesError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onCreate: (evt) => {
       dispatch(register(evt));
+    },
+    onGetTechnologies: (evt) => {
+      dispatch(getTechnologies(evt));
     },
   };
 }

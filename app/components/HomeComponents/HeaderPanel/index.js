@@ -39,15 +39,17 @@ function HeaderPanel({ name, deadline, isOpen }) {
         <NameItem>
           {name}
         </NameItem>
-        <DeadlineItem>
-          {deadline}
-        </DeadlineItem>
       </ContainerNameAndDeadLine>
-      <img
-        alt="arrow"
-        style={{ height: '1.5em', transform: `rotate(${rotate}90deg)` }}
-        src={arrowImage}
-      />
+      <span>
+        <DeadlineItem>
+          {'Límite: '}{deadline}
+        </DeadlineItem>
+        <img
+          alt="arrow"
+          style={{ height: '1.5em', transform: `rotate(${rotate}90deg)` }}
+          src={arrowImage}
+        />
+      </span>
     </Wrapper>
   );
 }

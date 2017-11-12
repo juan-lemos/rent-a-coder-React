@@ -9,11 +9,7 @@ function CandidatesList({ offers, viewCandidateProfile, selectCandidate }) {
       {offers.map((offer) => (
         <CandidatesListItem
           key={offer.candidate.id}
-          candidateName={offer.candidate.name}
-          stars={offer.candidate.developer_score}
-          estimatedPrice={offer.cost}
-          estimatedTime={offer.estimated_time}
-          candidateId={offer.candidate.id}
+          offer={offer}
           selectCandidate={(id) => viewCandidateProfile(id)}
           viewCandidateProfile={(id) => selectCandidate(id)}
         />

@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Grid } from 'react-bootstrap';
 import LoadingIndicator from 'components/common/LoadingIndicator';
+import ConfirmationModal from 'components/CandidatesComponents/ConfirmationModal';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -14,32 +15,54 @@ import {
   makeSelectCandidates,
   makeSelectCandidatesLoading,
   makeSelectCandidatesError,
-  // makeSelectSelectCandidate,
-  // makeSelectSelectCandidateError,
-  // makeSelectSelectCandidateLoading,
+  makeSelectSelectCandidate,
+  makeSelectSelectCandidateError,
+  makeSelectSelectCandidateLoading,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 import {
   getCandidates,
-  // putSelectCandidate,
+  putSelectCandidate,
+  cleanPutSelectCandidateerror,
 } from './actions';
 
 
 export class CandidatesPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+      selectedOffer: {},
+    };
+  }
+
   componentWillMount() {
     this.props.onGetCandidatesOffers(this.props.match.params.proyX);
   }
 
-  handleSelectCandidate(candidateId) {
-    console.log(`selected candidate ${candidateId}`);
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.selectCandidateLoading && nextProps.selectCandidateResponse != null) {
+      this.props.history.push('/profile');
+      this.props.onCleanSelectCandidateOffer();
+    }
   }
 
-  handleViewCandidateProfile(candidateId) {
-    console.log(`view profile ${candidateId}`);
+  handleSelectCandidate(offer) {
+    this.setState({ showModal: true, selectedOffer: offer });
   }
 
+  handleViewCandidateProfile(offer) {
+    console.log(offer.candidate.id);
+  }
+
+  handleOnConfirm() {
+    this.props.onSelectCandidateOffer({
+      candidateId: this.state.offer.candidate.id,
+      projectId: this.props.match.params.proyX,
+    });
+  }
 
   render() {
     let renderOffers;
@@ -51,9 +74,35 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
       renderOffers =
         (<CandidatesComponents
           offers={this.props.candidatesOffersResponse.offers}
-          viewCandidateProfile={(id) => this.handleViewCandidateProfile(id)}
-          selectCandidate={(id) => this.handleSelectCandidate(id)}
+          viewCandidateProfile={(offer) => this.handleViewCandidateProfile(offer)}
+          selectCandidate={(offer) => this.handleSelectCandidate(offer)}
         />);
+    }
+
+    let renderModal;
+    if (this.state.showModal) {
+      renderModal =
+        (<ConfirmationModal
+          offer={this.state.selectedOffer}
+          onCancel={() => this.setState({ showModal: false })}
+          onConfirm={() => this.handleOnConfirm()}
+        />);
+    } else {
+      renderModal = null;
+    }
+
+    let render;
+    if (this.props.selectCandidateLoading) {
+      render = <LoadingIndicator />;
+    } else if (this.props.selectCandidateError) {
+      render = <div>{'Error!'}</div>;
+    } else {
+      render = (
+        <div>
+          {renderOffers}
+          {renderModal}
+        </div>
+      );
     }
 
     return (
@@ -63,8 +112,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
           <meta name="description" content="Description of CandidatesPage" />
         </Helmet>
         <h1>{'Candidatos:'}</h1>
-        {renderOffers}
-
+        {render}
       </Grid>
     );
   }
@@ -76,18 +124,33 @@ CandidatesPage.propTypes = {
   candidatesOffersResponse: PropTypes.object,
   candidatesOffersLoading: PropTypes.bool,
   candidatesOffersError: PropTypes.bool,
+  onSelectCandidateOffer: PropTypes.func,
+  selectCandidateLoading: PropTypes.bool,
+  selectCandidateError: PropTypes.bool,
+  onCleanSelectCandidateOffer: PropTypes.func,
+  history: PropTypes.object,
+  selectCandidateResponse: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   candidatesOffersResponse: makeSelectCandidates(),
   candidatesOffersLoading: makeSelectCandidatesLoading(),
   candidatesOffersError: makeSelectCandidatesError(),
+  selectCandidateResponse: makeSelectSelectCandidate(),
+  selectCandidateError: makeSelectSelectCandidateError(),
+  selectCandidateLoading: makeSelectSelectCandidateLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onGetCandidatesOffers: (evt) => {
       dispatch(getCandidates(evt));
+    },
+    onSelectCandidateOffer: (evt) => {
+      dispatch(putSelectCandidate(evt));
+    },
+    onCleanSelectCandidateOffer: (evt) => {
+      dispatch(cleanPutSelectCandidateerror(evt));
     },
   };
 }

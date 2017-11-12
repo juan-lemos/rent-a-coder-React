@@ -33,36 +33,36 @@ export function* getCandidates(action) {
   }
 }
 
-// export function* putSelectCandidate(action) {
-//   const loginReference = 'https://rent-a-coder-api.herokuapp.com/offers';
-//   const requestHeaders = {
-//     'Content-Type': 'application/json',
-//     Accept: 'application/json',
-//   };
-//   requestHeaders[SESSION_TOKEN] = getSessionToken();
-//   requestHeaders[SESSION_CLIENT] = getSessionClient();
-//   requestHeaders[SESSION_UID] = getSessionUid();
+export function* putSelectCandidate(action) {
+  const loginReference = `https://rent-a-coder-api.herokuapp.com/projects/${action.content.projectId}/developer`;
+  const requestHeaders = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+  requestHeaders[SESSION_TOKEN] = getSessionToken();
+  requestHeaders[SESSION_CLIENT] = getSessionClient();
+  requestHeaders[SESSION_UID] = getSessionUid();
 
-//   try {
-//     const response = yield call(request, loginReference, {
-//       method: 'POST',
-//       headers: {
-//         ...requestHeaders,
-//       },
-//       body: JSON.stringify({
-//         ...action.content,
-//       }),
-//     });
-//     yield put(putSelectCandidateLoaded(response));
-//   } catch (err) {
-//     const error = yield Promise.resolve(err);
-//     yield put(putSelectCandidateError(error));
-//   }
-// }
+  try {
+    const response = yield call(request, loginReference, {
+      method: 'POST',
+      headers: {
+        ...requestHeaders,
+      },
+      body: JSON.stringify({
+        developer_id: action.content.developer_id,
+      }),
+    });
+    yield put(putSelectCandidateLoaded(response));
+  } catch (err) {
+    const error = yield Promise.resolve(err);
+    yield put(putSelectCandidateError(error));
+  }
+}
 
 export default function* rootSaga() {
   yield all([
     takeLatest(GET_CANDIDATES, getCandidates),
-    // takeLatest(PUT_SELECT_CANDIDATE, putSelectCandidate),
+    takeLatest(PUT_SELECT_CANDIDATE, putSelectCandidate),
   ]);
 }

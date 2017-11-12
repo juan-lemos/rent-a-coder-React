@@ -9,15 +9,16 @@ import styled from 'styled-components';
 import Form from 'components/RegisterComponents/RegisterForm';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+
 import {
   makeSelectTechnologies,
   makeSelectTechnologiesLoading,
   makeSelectTechnologiesError,
 } from 'containers/App/selectors';
-
 import {
   getTechnologies,
 } from 'containers/App/actions';
+
 import { register } from './actions';
 import reducer from './reducer';
 import saga from './saga';

@@ -9,6 +9,7 @@ function FormInputField({
   onChange,
   errorMessage,
   inputType,
+  defaultValue,
 }) {
   return (
     <FormGroup validationState={validationState}>
@@ -20,6 +21,7 @@ function FormInputField({
           type={inputType}
           name={fieldId}
           onChange={onChange}
+          defaultValue={defaultValue}
         />
         <FormControl.Feedback />
         {validationState === 'error' && <ControlLabel>{errorMessage}</ControlLabel>}
@@ -35,6 +37,7 @@ FormInputField.propTypes = {
   onChange: PropTypes.func,
   errorMessage: PropTypes.string,
   inputType: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default FormInputField;

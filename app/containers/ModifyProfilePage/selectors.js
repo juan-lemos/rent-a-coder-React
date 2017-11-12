@@ -5,21 +5,39 @@ import { createSelector } from 'reselect';
  */
 const selectModifyProfilePageDomain = (state) => state.get('modifyProfilePage');
 
-/**
- * Other specific selectors
- */
+const makeSelectProfile = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('responseProfile')
+  );
+
+const makeSelectProfileLoading = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('loadingProfile')
+  );
+const makeSelectProfileError = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('errorProfile')
+  );
 
 
-/**
- * Default selector used by ModifyProfilePage
- */
+const makeSelectpostProfileModify = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('responsePostModification')
+  );
+const makeSelectpostProfileModifyLoading = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('loadingPostModification')
+  );
+const makeSelectpostProfileModifyError = () =>
+  createSelector(selectModifyProfilePageDomain, (substate) =>
+    substate.get('errorPostModification')
+  );
 
-const makeSelectModifyProfilePage = () => createSelector(
-  selectModifyProfilePageDomain,
-  (substate) => substate.toJS()
-);
-
-export default makeSelectModifyProfilePage;
 export {
-  selectModifyProfilePageDomain,
+  makeSelectProfile,
+  makeSelectProfileLoading,
+  makeSelectProfileError,
+  makeSelectpostProfileModify,
+  makeSelectpostProfileModifyLoading,
+  makeSelectpostProfileModifyError,
 };

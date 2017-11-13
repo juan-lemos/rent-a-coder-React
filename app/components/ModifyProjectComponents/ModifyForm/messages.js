@@ -7,7 +7,11 @@ import { defineMessages } from 'react-intl';
 
 export default defineMessages({
   header: {
-    id: 'app.components.ModifyForm.header',
+    id: 'app.components.ModifyProjectComponents.ModifyForm.header',
     defaultMessage: 'This is the ModifyForm component !',
+  },
+  error: {
+    id: 'app.components.ModifyProjectComponents.ModifyForm.error',
+    defaultMessage: 'Error!',
   },
 });

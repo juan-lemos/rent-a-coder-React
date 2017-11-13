@@ -59,7 +59,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
 
   handleOnConfirm() {
     this.props.onSelectCandidateOffer({
-      candidateId: this.state.offer.candidate.id,
+      developer_id: this.state.selectedOffer.candidate.id,
       projectId: this.props.match.params.proyX,
     });
   }
@@ -94,7 +94,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
     let render;
     if (this.props.selectCandidateLoading) {
       render = <LoadingIndicator />;
-    } else if (this.props.selectCandidateError) {
+    } else if (this.props.selectCandidateError != null) {
       render = <div>{'Error!'}</div>;
     } else {
       render = (
@@ -126,7 +126,7 @@ CandidatesPage.propTypes = {
   candidatesOffersError: PropTypes.bool,
   onSelectCandidateOffer: PropTypes.func,
   selectCandidateLoading: PropTypes.bool,
-  selectCandidateError: PropTypes.bool,
+  selectCandidateError: PropTypes.object,
   onCleanSelectCandidateOffer: PropTypes.func,
   history: PropTypes.object,
   selectCandidateResponse: PropTypes.object,

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
-import '../../../../node_modules/react-datepicker/dist/datepicker-cssmodules.min.css';
+import './datepicker-cssmodules.min.css';
 
 const DateDiv = styled.div`
   .datePickerStyle{

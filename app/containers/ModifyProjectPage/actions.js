@@ -1,15 +1,51 @@
-/*
- *
- * ModifyProjectPage actions
- *
- */
-
 import {
-  DEFAULT_ACTION,
+  GET_PROJECT,
+  GET_PROJECT_SUCCESS,
+  GET_PROJECT_ERROR,
+  POST_PROJECT_MODIFICATION,
+  POST_PROJECT_MODIFICATION_SUCCESS,
+  POST_PROJECT_MODIFICATION_ERROR,
 } from './constants';
 
-export function defaultAction() {
+
+export function getProject(content) {
   return {
-    type: DEFAULT_ACTION,
+    type: GET_PROJECT,
+    content,
+  };
+}
+
+export function getProjectLoaded(content) {
+  return {
+    type: GET_PROJECT_SUCCESS,
+    content,
+  };
+}
+
+export function getProjectError(error) {
+  return {
+    type: GET_PROJECT_ERROR,
+    error,
+  };
+}
+
+export function postProjectModification(content) {
+  return {
+    type: POST_PROJECT_MODIFICATION,
+    content,
+  };
+}
+
+export function postProjectModificationLoaded(content) {
+  return {
+    type: POST_PROJECT_MODIFICATION_SUCCESS,
+    content,
+  };
+}
+
+export function postProjectModificationError(error) {
+  return {
+    type: POST_PROJECT_MODIFICATION_ERROR,
+    error,
   };
 }

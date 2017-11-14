@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import FormInputField from 'components/common/FormInputField';
 import { Button, Form, FormGroup, Col, Well, ControlLabel, FormControl } from 'react-bootstrap';
 
@@ -58,7 +58,7 @@ function ModifyForm({
             </Col>
             <Col sm={12}>
               <CustomDatePicker
-                date={values.date}
+                date={values.deadline}
                 handleDateChange={(selectedDate) => handleDateChange(selectedDate)}
               />
               <FormControl.Feedback />
@@ -66,7 +66,7 @@ function ModifyForm({
             </Col>
           </FormGroup>
 
-          <FormGroup validationState={errorsInFields.technologies_ids ? 'error' : null}>
+          <FormGroup validationState={errorsInFields.selectedTechnologies ? 'error' : null}>
             <Col sm={12}>
               {'Seleccione las tecnologías'}
             </Col>
@@ -86,7 +86,7 @@ function ModifyForm({
           <FormGroup>
             <Col sm={12}>
               <Button onClick={() => handleClickOnCreate()}>
-                <FormattedMessage {...messages.error} />
+                {'Modificar'}
               </Button>
             </Col>
           </FormGroup>

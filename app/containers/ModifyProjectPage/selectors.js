@@ -1,25 +1,41 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the modifyProjectPage state domain
- */
 const selectModifyProjectPageDomain = (state) => state.get('modifyProjectPage');
 
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by ModifyProjectPage
- */
-
-const makeSelectModifyProjectPage = () => createSelector(
-  selectModifyProjectPageDomain,
-  (substate) => substate.toJS()
+const makeSelectProject = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('responseProject')
 );
 
-export default makeSelectModifyProjectPage;
+const makeSelectProjectLoading = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('loadingProject')
+);
+const makeSelectProjectError = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('errorProject')
+);
+
+
+const makeSelectpostProjectModify = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('responsePostModification')
+);
+const makeSelectpostProjectModifyLoading = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('loadingPostModification')
+);
+const makeSelectpostProjectModifyError = () =>
+createSelector(selectModifyProjectPageDomain, (substate) =>
+  substate.get('errorPostModification')
+);
+
+
 export {
-  selectModifyProjectPageDomain,
+  makeSelectProject,
+  makeSelectProjectLoading,
+  makeSelectProjectError,
+  makeSelectpostProjectModify,
+  makeSelectpostProjectModifyLoading,
+  makeSelectpostProjectModifyError,
 };

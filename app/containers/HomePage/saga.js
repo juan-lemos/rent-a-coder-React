@@ -29,7 +29,8 @@ export function* getProjects() {
     });
     yield put(getProjectsLoaded(response));
   } catch (err) {
-    yield put(getProjectsError(err));
+    const error = yield Promise.resolve(err);
+    yield put(getProjectsError(error));
   }
 }
 

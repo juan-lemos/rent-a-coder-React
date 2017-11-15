@@ -12,6 +12,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
 
+
 import reducer from './reducer';
 import saga from './saga';
 import {
@@ -52,6 +53,12 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       this.props.cleanOffer();
       this.props.onGetProjects();
     }
+    if (nextProps.projectsError !== null) {
+      if (nextProps.projectsError.errors !== undefined
+        && nextProps.projectsError.errors[0] !== undefined) {
+        this.props.history.push('/login');
+      }
+    }
   }
 
   componentWillUpdate(nextProps) {
@@ -91,7 +98,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     let renderList;
     if (this.props.projectsLoading) {
       renderList = <LoadingIndicator />;
-    } else if (this.props.projectsError) {
+    } else if (this.props.projectsError !== null) {
       renderList = <div>Error Loading</div>;
     } else if (this.props.projectsResponse != null) {
       renderList = (
@@ -121,7 +128,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           </div>
           )
         }
-      </Grid>
+      </Grid >
     );
   }
 }
@@ -129,12 +136,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 HomePage.propTypes = {
   projectsResponse: PropTypes.object,
   projectsLoading: PropTypes.bool,
-  projectsError: PropTypes.bool,
+  projectsError: PropTypes.object,
   onGetProjects: PropTypes.func,
   onOffer: PropTypes.func,
   offerLoading: PropTypes.bool,
   offerResponse: PropTypes.object,
   cleanOffer: PropTypes.func,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

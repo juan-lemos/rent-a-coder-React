@@ -25,7 +25,6 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     this.state = {
       email: '',
       password: '',
-      errorInLogin: false,
     };
   }
 
@@ -60,7 +59,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         <div style={{ maxWidth: '300px', margin: 'auto' }}>
           <LoginForm
             logoUrl={Logo}
-            errorInLogin={this.state.errorInLogin}
+            errorInLogin={this.props.loginError}
             handleFieldChange={(event) => (this.handleChangeOnInputField(event))}
             handleSignInClick={() => this.handleSignInClick()}
             handleClickRegister={() => this.handleClickRegister()}
@@ -76,6 +75,7 @@ LoginPage.propTypes = {
   onLogin: PropTypes.func,
   loginResponse: PropTypes.object,
   loginLoading: PropTypes.bool,
+  loginError: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

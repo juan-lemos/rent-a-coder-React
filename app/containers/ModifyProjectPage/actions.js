@@ -5,6 +5,7 @@ import {
   POST_PROJECT_MODIFICATION,
   POST_PROJECT_MODIFICATION_SUCCESS,
   POST_PROJECT_MODIFICATION_ERROR,
+  CLEAN_POST_PROJECT_MODIFICATION,
 } from './constants';
 
 
@@ -47,5 +48,11 @@ export function postProjectModificationError(error) {
   return {
     type: POST_PROJECT_MODIFICATION_ERROR,
     error,
+  };
+}
+
+export function cleanPostProjectModification() {
+  return {
+    type: CLEAN_POST_PROJECT_MODIFICATION,
   };
 }

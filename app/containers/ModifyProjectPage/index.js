@@ -31,7 +31,11 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 
-import { postProjectModification, getProject } from './actions';
+import {
+  postProjectModification,
+  getProject,
+  cleanPostProjectModification,
+} from './actions';
 
 const Container = styled.div`
 max-width : 500px;
@@ -56,6 +60,7 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
       },
     };
     this.props.onGetProject(this.props.match.params.proyX);
+    this.isFirstTime = false;
   }
 
   componentWillMount() {
@@ -63,7 +68,7 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.getProject != null) {
+    if (nextProps.getProject != null && !this.isFirstTime) {
       const technologies = [];
       nextProps.getProject.technologies.forEach((item) =>
         technologies.push({ value: item.id, label: item.name })
@@ -75,16 +80,16 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
         selectedTechnologies: technologies,
       };
       this.setState({ values });
+      this.isFirstTime = true;
     }
 
-    // if (!nextProps.profileModifyLoading && nextProps.profileModify != null) {
-    //   this.props.history.push('/profile');
-    //   this.props.onCleanModifyProfile();
-    // }
+    if (!nextProps.postProjectModificationLoading && nextProps.postProjectModification != null) {
+      this.props.history.push('/profile');
+      this.props.onCleanModifyProject();
+    }
   }
 
   componentWillUpdate(nextProps) {
-    // console.log(nextProps.postProjectModificationError);
     if (nextProps.postProjectModificationError != null) {
       let propertyName;
       let property;
@@ -167,20 +172,16 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
 ModifyProjectPage.propTypes = {
   match: PropTypes.object,
   onGetTechnologies: PropTypes.func,
-  // technologiesLoading: PropTypes.bool,
-  // technologiesError: PropTypes.bool,
   technologiesResponse: PropTypes.array,
   getProject: PropTypes.object,
   getProjectLoading: PropTypes.bool,
   getProjectError: PropTypes.bool,
   onGetProject: PropTypes.func,
   onModifyProject: PropTypes.func,
-  // onCreateProject: PropTypes.func,
-  // createProjectLoading: PropTypes.bool,
-  // createProjectResponse: PropTypes.object,
-  // cleanPutProject: PropTypes.func,
-  // history: PropTypes.object,
-
+  onCleanModifyProject: PropTypes.func,
+  history: PropTypes.object,
+  postProjectModificationLoading: PropTypes.bool,
+  postProjectModification: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -206,6 +207,9 @@ function mapDispatchToProps(dispatch) {
     },
     onGetProject: (evt) => {
       dispatch(getProject(evt));
+    },
+    onCleanModifyProject: (evt) => {
+      dispatch(cleanPostProjectModification(evt));
     },
   };
 }

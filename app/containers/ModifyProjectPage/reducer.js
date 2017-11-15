@@ -6,6 +6,7 @@ import {
   POST_PROJECT_MODIFICATION,
   POST_PROJECT_MODIFICATION_SUCCESS,
   POST_PROJECT_MODIFICATION_ERROR,
+  CLEAN_POST_PROJECT_MODIFICATION,
 } from './constants';
 
 const initialState = fromJS({
@@ -40,11 +41,16 @@ function modifyProjectPageReducer(state = initialState, action) {
     case POST_PROJECT_MODIFICATION_SUCCESS:
       return state
         .set('loadingPostModification', false)
-        .set('responsePostModification', action.content.body);
+        .set('responsePostModification', action.content);
     case POST_PROJECT_MODIFICATION_ERROR:
       return state
         .set('loadingPostModification', false)
         .set('errorPostModification', action.error);
+    case CLEAN_POST_PROJECT_MODIFICATION:
+      return state
+        .set('loadingPostModification', false)
+        .set('errorPostModification', null)
+        .set('responsePostModification', null);
     default:
       return state;
   }

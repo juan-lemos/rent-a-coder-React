@@ -6,6 +6,7 @@ import {
   PUT_SELECT_CANDIDATE,
   PUT_SELECT_CADIDATE_SUCCESS,
   PUT_SELECT_CANDIDATE_ERROR,
+  CLEAN_PUT_SELECT_CANDIDATE,
 } from './constants';
 
 const initialState = fromJS({
@@ -45,6 +46,11 @@ function homePageReducer(state = initialState, action) {
       return state
         .set('loadingPutCandidate', false)
         .set('errorPutCandidate', action.error);
+    case CLEAN_PUT_SELECT_CANDIDATE:
+      return state
+        .set('loadingPutCandidate', false)
+        .set('errorPutCandidate', null)
+        .set('responsePutCandidate', null);
     default:
       return state;
   }

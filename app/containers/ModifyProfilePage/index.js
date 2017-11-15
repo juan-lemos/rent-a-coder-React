@@ -77,7 +77,9 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
         web: '',
         technologies: [],
       },
+
     };
+    this.isFirstTime = false;
   }
 
 
@@ -86,7 +88,7 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
     this.props.onGetProfile();
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.profileResponse != null) {
+    if (nextProps.profileResponse != null && !this.isFirstTime) {
       const values = {
         name: nextProps.profileResponse.user.name,
         nickname: nextProps.profileResponse.user.nickname,
@@ -99,6 +101,7 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
         // technologies: nextProps.profileResponse.user.technologies,
       };
       this.setState({ values });
+      this.isFirstTime = true;
     }
 
     if (!nextProps.profileModifyLoading && nextProps.profileModify != null) {

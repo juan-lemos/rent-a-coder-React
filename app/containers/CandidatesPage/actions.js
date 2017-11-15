@@ -5,6 +5,7 @@ import {
   PUT_SELECT_CANDIDATE,
   PUT_SELECT_CADIDATE_SUCCESS,
   PUT_SELECT_CANDIDATE_ERROR,
+  CLEAN_PUT_SELECT_CANDIDATE,
 } from './constants';
 
 export function getCandidates(content) {
@@ -46,6 +47,12 @@ export function putSelectCandidateError(error) {
   return {
     type: PUT_SELECT_CANDIDATE_ERROR,
     error,
+  };
+}
+
+export function cleanPutSelectCandidateerror() {
+  return {
+    type: CLEAN_PUT_SELECT_CANDIDATE,
   };
 }
 

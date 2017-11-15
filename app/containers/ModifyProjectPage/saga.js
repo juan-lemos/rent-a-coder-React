@@ -1,17 +1,20 @@
 import request from 'utils/request';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { SESSION_TOKEN, SESSION_CLIENT, SESSION_UID } from 'containers/App/constants';
+import { SESSION_TOKEN, SESSION_CLIENT, SESSION_UID, GET_TECHNOLOGIES } from 'containers/App/constants';
 import { getSessionToken, getSessionClient, getSessionUid } from 'containers/App/session';
-import {
-  getCandidatesLoaded,
-  getCandidatesError,
-  putSelectCandidateLoaded,
-  putSelectCandidateError,
-} from './actions';
-import { GET_CANDIDATES, PUT_SELECT_CANDIDATE } from './constants';
+import { getTechnologies } from 'containers/App/saga';
+import { GET_PROJECT, POST_PROJECT_MODIFICATION } from './constants';
 
-export function* getCandidates(action) {
-  const loginReference = `https://rent-a-coder-api.herokuapp.com/candidates/${action.content}`;
+import {
+  getProjectLoaded,
+  getProjectError,
+  postProjectModificationLoaded,
+  postProjectModificationError,
+} from './actions';
+
+
+export function* getProject(action) {
+  const loginReference = `https://rent-a-coder-api.herokuapp.com/projects/${action.content}`;
   const requestHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -27,14 +30,16 @@ export function* getCandidates(action) {
         ...requestHeaders,
       },
     });
-    yield put(getCandidatesLoaded(response));
+    yield put(getProjectLoaded(response));
   } catch (err) {
-    yield put(getCandidatesError(err));
+    const error = yield Promise.resolve(err);
+    yield put(getProjectError(error));
   }
 }
 
-export function* putSelectCandidate(action) {
-  const loginReference = `https://rent-a-coder-api.herokuapp.com/projects/${action.content.projectId}/developer`;
+
+export function* putProject(action) {
+  const loginReference = `https://rent-a-coder-api.herokuapp.com/projects/${action.content.projectId}`;
   const requestHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -45,24 +50,27 @@ export function* putSelectCandidate(action) {
 
   try {
     const response = yield call(request, loginReference, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         ...requestHeaders,
       },
       body: JSON.stringify({
-        developer_id: action.content.developer_id,
+        ...action.content.values,
       }),
     });
-    yield put(putSelectCandidateLoaded(response));
+    yield put(postProjectModificationLoaded(response));
   } catch (err) {
     const error = yield Promise.resolve(err);
-    yield put(putSelectCandidateError(error));
+    yield put(postProjectModificationError(error));
   }
 }
 
+
 export default function* rootSaga() {
   yield all([
-    takeLatest(GET_CANDIDATES, getCandidates),
-    takeLatest(PUT_SELECT_CANDIDATE, putSelectCandidate),
+    takeLatest(GET_TECHNOLOGIES, getTechnologies),
+    takeLatest(POST_PROJECT_MODIFICATION, putProject),
+    takeLatest(GET_PROJECT, getProject),
   ]);
 }
+

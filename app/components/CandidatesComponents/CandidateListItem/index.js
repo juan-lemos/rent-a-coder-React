@@ -18,11 +18,7 @@ font-weight: bold;
 
 
 function CandidateListItem({
-  candidateName,
-  stars,
-  estimatedPrice,
-  estimatedTime,
-  candidateId,
+  offer,
   selectCandidate,
   viewCandidateProfile }) {
   return (
@@ -31,10 +27,10 @@ function CandidateListItem({
         <Col xs={12}>
           <NameAndStarts>
             <NameItem>
-              {candidateName}
+              {offer.candidate.name}
             </NameItem>
             <span>
-              <ReactStars count={5} value={stars} className="rating-container" edit={false} size={20} />
+              <ReactStars count={5} value={offer.candidate.developer_score} className="rating-container" edit={false} size={20} />
             </span>
           </NameAndStarts>
         </Col>
@@ -42,18 +38,18 @@ function CandidateListItem({
       <Row>
         <Col xs={12} sm={6}>
           <Row>
-            {`U$S: ${estimatedPrice}`}
+            {`U$S: ${offer.cost}`}
           </Row>
           <Row>
-            {`Días estimados: ${estimatedTime}`}
+            {`Días estimados: ${offer.estimated_time}`}
           </Row>
         </Col>
         <Col xs={12} sm={6}>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button style={{ marginRight: '10px' }} onClick={() => selectCandidate(candidateId)}>
+            <Button style={{ marginRight: '10px' }} onClick={() => selectCandidate(offer)}>
               {'Ver perfil'}
             </Button>
-            <Button bsStyle="primary" onClick={() => viewCandidateProfile(candidateId)}>
+            <Button bsStyle="primary" onClick={() => viewCandidateProfile(offer)}>
               {'Asignar'}
             </Button>
           </div>
@@ -64,11 +60,7 @@ function CandidateListItem({
 }
 
 CandidateListItem.propTypes = {
-  candidateName: PropTypes.string,
-  stars: PropTypes.number,
-  estimatedPrice: PropTypes.string,
-  estimatedTime: PropTypes.number,
-  candidateId: PropTypes.number,
+  offer: PropTypes.object,
   selectCandidate: PropTypes.func,
   viewCandidateProfile: PropTypes.func,
 };

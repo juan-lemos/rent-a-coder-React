@@ -1,9 +1,3 @@
-/**
-*
-* NavigationBar
-*
-*/
-
 import React from 'react';
 // import styled from 'styled-components';
 
@@ -11,8 +5,25 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import {
+  getSessionToken,
+  resetLogginVariables,
+} from 'containers/App/session';
 import messages from './messages';
 
+
+function chooseMessage() {
+  if (getSessionToken() == null || getSessionToken() === 'null') {
+    return <FormattedMessage {...messages.login} />;
+  }
+  return (
+    <div // eslint-disable-line
+      onClick={() => resetLogginVariables()}
+    >
+      <FormattedMessage {...messages.logout} />
+    </div>
+  );
+}
 
 function NavigationBar() {
   const navbarInstance = (
@@ -36,7 +47,7 @@ function NavigationBar() {
         <Nav pullRight>
           <LinkContainer to="/login">
             <NavItem eventKey={2}>
-              <FormattedMessage {...messages.login} />
+              {chooseMessage()}
             </NavItem>
           </LinkContainer>
           <LinkContainer to="/profile">

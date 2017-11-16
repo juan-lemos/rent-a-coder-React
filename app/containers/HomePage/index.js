@@ -11,6 +11,7 @@ import OfferModal from 'components/HomeComponents/OfferModal';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
+import RedirectNoLogged from 'components/RedirectNoLogged';
 
 
 import reducer from './reducer';
@@ -173,8 +174,8 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'homePage', reducer });
 const withSaga = injectSaga({ key: 'homePage', saga });
 
-export default compose(
+export default RedirectNoLogged(compose(
   withReducer,
   withSaga,
   withConnect,
-)(HomePage);
+)(HomePage));

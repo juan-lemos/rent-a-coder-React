@@ -12,6 +12,7 @@ import moment from 'moment';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
+import RedirectNoLogged from 'components/RedirectNoLogged';
 
 import {
   makeSelectTechnologies,
@@ -192,8 +193,8 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'publishProjectPage', reducer });
 const withSaga = injectSaga({ key: 'publishProjectPage', saga });
 
-export default compose(
+export default RedirectNoLogged(compose(
   withReducer,
   withSaga,
   withConnect,
-)(PublishProjectPage);
+)(PublishProjectPage));

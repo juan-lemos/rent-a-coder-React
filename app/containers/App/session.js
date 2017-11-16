@@ -28,3 +28,8 @@ export function getSessionClient() {
 export function getSessionUid() {
   return sessionStorage.getItem(SESSION_UID);
 }
+export function resetLogginVariables() {
+  setSessionUid(null);
+  setSessionClient(null);
+  setSessionToken(null);
+}

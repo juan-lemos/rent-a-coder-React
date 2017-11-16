@@ -9,11 +9,13 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import ProfileInfo from 'components/ProfileComponents/ProfileInfo';
 import ProjectsTab from 'components/ProfileComponents/ProjectsTab';
+import RedirectNoLogged from 'components/RedirectNoLogged';
 import { profile } from './actions';
 import { makeSelectUserData, makeSelectProfileError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import './index.css';
+
 
 export class ProfilePage extends React.PureComponent {
 
@@ -87,8 +89,9 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'profilePage', reducer });
 const withSaga = injectSaga({ key: 'profilePage', saga });
 
-export default compose(
+export default RedirectNoLogged(compose(
   withReducer,
   withSaga,
   withConnect,
-)(ProfilePage);
+)(ProfilePage));
+

@@ -18,6 +18,10 @@ export default defineMessages({
     id: 'app.components.common.NavigationBar.login',
     defaultMessage: 'Login',
   },
+  logout: {
+    id: 'app.components.common.NavigationBar.logout',
+    defaultMessage: 'Logout',
+  },
   publish: {
     id: 'app.components.common.NavigationBar.publish',
     defaultMessage: 'Publish',

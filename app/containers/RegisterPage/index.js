@@ -116,7 +116,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
         <RegisterContainer>
-          <h1>{'Registro:'}</h1>
+          <h1>{'Registro'}</h1>
           <Form
             formFields={this.state.formFields}
             handleCreateOnClick={() => this.handleCreateOnClick()}

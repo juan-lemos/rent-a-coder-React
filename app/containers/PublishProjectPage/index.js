@@ -146,6 +146,7 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
           <meta name="description" content="Description of PublishProjectPage" />
         </Helmet>
         <Container>
+          <h1>{'Crear un proyecto'}</h1>
           {renderBody}
         </Container>
       </div>

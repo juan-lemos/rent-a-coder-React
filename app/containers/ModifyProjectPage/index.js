@@ -162,6 +162,7 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
           <meta name="description" content="Description of ModifyProjectPage" />
         </Helmet>
         <Container>
+          <h1>{'Editar proyecto'}</h1>
           {renderFields}
         </Container>
       </div>

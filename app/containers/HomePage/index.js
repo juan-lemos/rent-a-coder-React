@@ -53,6 +53,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       this.setState({ showModalOffer: false, errorsInFields: { cost: false, estimated_time: false } });
       this.props.cleanOffer();
       this.props.onGetProjects();
+    } else if (nextProps.offerError == null) {
+      this.setState({ errorsInFields: { cost: false, estimated_time: false } });
     }
     if (nextProps.projectsError !== null) {
       if (nextProps.projectsError.errors !== undefined
@@ -68,11 +70,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       let property;
       const properties = this.state.errorsInFields;
       for (property in properties) {// eslint-disable-line 
-        properties[property].error = false;
+        properties[property] = false;
       }
       for (propertyName in nextProps.offerError.errors) {// eslint-disable-line 
         if (properties[propertyName] !== undefined) {
-          properties[propertyName].error = true;
+          properties[propertyName] = true;
         }
       }
     }
@@ -91,7 +93,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       offerToSend.project_id = this.state.selectedProjectOffer.id;
       this.props.onOffer(offerToSend);
     } else {
-      this.setState({ showModalOffer: false });
+      this.setState({
+        showModalOffer: false,
+      });
+      this.props.cleanOffer();
     }
   }
 
@@ -115,20 +120,16 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <title>Home</title>
           <meta name="description" content="Description of Home" />
         </Helmet>
-        <h1>{'Proyectos sin ofertar:'}</h1>
-        {this.props.offerLoading ?
-          <LoadingIndicator /> :
-          (<div>
-            {renderList}
-            <OfferModal
-              show={this.state.showModalOffer}
-              errorsInFields={this.state.errorsInFields}
-              handleClose={(offer) => this.handleCloseModal(offer)}
-              projectName={this.state.selectedProjectOffer.name}
-            />
-          </div>
-          )
-        }
+        <h1>{'Proyectos sin ofertar'}</h1>
+        <div>
+          {renderList}
+          <OfferModal
+            show={this.state.showModalOffer}
+            errorsInFields={this.state.errorsInFields}
+            handleClose={(offer) => this.handleCloseModal(offer)}
+            projectName={this.state.selectedProjectOffer.name}
+          />
+        </div>
       </Grid >
     );
   }
@@ -140,10 +141,10 @@ HomePage.propTypes = {
   projectsError: PropTypes.object,
   onGetProjects: PropTypes.func,
   onOffer: PropTypes.func,
-  offerLoading: PropTypes.bool,
   offerResponse: PropTypes.object,
   cleanOffer: PropTypes.func,
   history: PropTypes.object,
+  offerError: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

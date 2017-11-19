@@ -12,9 +12,20 @@
   float: right;
 }
 
+.project-body {
+  position: relative;
+}
+
 .project-body-section {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
 .project-body-title {
   display: block;
+}
+
+.project-body-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

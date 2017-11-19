@@ -10,7 +10,7 @@ import messages from './messages';
 
 function ModifyForm({
   handleFieldChange,
-  handleCreateOnClick,
+  handleModifyOnClick,
   handleSelectedTechnologies,
   values,
   technologies,
@@ -51,7 +51,7 @@ function ModifyForm({
           </FormGroup>
           <FormGroup>
             <Col sm={12}>
-              <Button onClick={() => handleCreateOnClick()}>
+              <Button onClick={() => handleModifyOnClick()}>
                 <FormattedMessage {...messages.modify} />
               </Button>
             </Col>
@@ -66,7 +66,7 @@ function ModifyForm({
 
 ModifyForm.propTypes = {
   handleFieldChange: PropTypes.func,
-  handleCreateOnClick: PropTypes.func,
+  handleModifyOnClick: PropTypes.func,
   formFields: PropTypes.any,
   handleSelectedTechnologies: PropTypes.func,
   values: PropTypes.object,

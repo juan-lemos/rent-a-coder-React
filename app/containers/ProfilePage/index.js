@@ -23,6 +23,14 @@ export class ProfilePage extends React.PureComponent {
     this.props.onCreate({ ...this.values });
   }
 
+  handleClickEditProject(projectId) {
+    this.props.history.push(`/projectEdit/${projectId}`);
+  }
+
+  handleClickAssignProject(projectId) {
+    this.props.history.push(`/candidates/${projectId}`);
+  }
+
   render() {
     const {
       developer_score: developerScore,
@@ -56,7 +64,13 @@ export class ProfilePage extends React.PureComponent {
           />
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">
-              <ProjectsTab eventKey={1} title="Publicados" projects={uploadedProjects} />
+              <ProjectsTab
+                eventKey={1}
+                title="Publicados"
+                projects={uploadedProjects}
+                handleClickEditProject={(projectId) => this.handleClickEditProject(projectId)}
+                handleClickAssignProject={(projectId) => this.handleClickAssignProject(projectId)}
+              />
               <ProjectsTab eventKey={2} title="Postulados" projects={projectsAsCandidate} />
             </Tabs>
           </Col>
@@ -69,6 +83,7 @@ export class ProfilePage extends React.PureComponent {
 ProfilePage.propTypes = {
   onCreate: PropTypes.func.isRequired,
   userData: PropTypes.object,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

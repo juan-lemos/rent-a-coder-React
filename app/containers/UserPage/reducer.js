@@ -1,19 +1,19 @@
 import { fromJS } from 'immutable';
 
 import {
-  PROFILE,
-  PROFILE_SUCCESS,
+  USER,
+  USER_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({
   userData: {},
 });
 
-function profilePageReducer(state = initialState, action) {
+function userPageReducer(state = initialState, action) {
   switch (action.type) {
-    case PROFILE:
+    case USER:
       return state;
-    case PROFILE_SUCCESS:
+    case USER_SUCCESS:
       return state
         .set('userData', action.content.user);
     default:
@@ -21,4 +21,4 @@ function profilePageReducer(state = initialState, action) {
   }
 }
 
-export default profilePageReducer;
+export default userPageReducer;

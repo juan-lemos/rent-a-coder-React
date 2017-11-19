@@ -3,7 +3,7 @@ import { Row, Col, Tab, Accordion, Panel, Label, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import './index.css';
 
-function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handleClickAssignProject }) {
+function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handleClickAssignProject, editable }) {
   const stateClasses = {
     open: 'success',
     offered: 'warning',
@@ -53,7 +53,7 @@ function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handle
       return (
         <Panel header={projectHeader} eventKey={project.id} key={project.id}>
           <Row className="project-body">
-            <Col sm={9} md={9} lg={9}>
+            <Col sm={(editable) ? 9 : 12} md={(editable) ? 9 : 12} lg={(editable) ? 9 : 12}>
               <p className="project-body-section">
                 <strong className="project-body-title">Descripción</strong>
                 {project.description}
@@ -67,9 +67,13 @@ function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handle
                 {project.deadline}
               </p>
             </Col>
-            <Col sm={3} md={3} lg={3} className="project-body-buttons">
-              {projectButton}
-            </Col>
+            {editable ? (
+              <Col sm={3} md={3} lg={3} className="project-body-buttons">
+                {projectButton}
+              </Col>
+            ) : (
+              ''
+            )}
           </Row>
         </Panel>
       );
@@ -94,6 +98,7 @@ ProjectsTab.propTypes = {
   projects: PropTypes.array,
   handleClickEditProject: PropTypes.func,
   handleClickAssignProject: PropTypes.func,
+  editable: PropTypes.bool,
 };
 
 export default ProjectsTab;

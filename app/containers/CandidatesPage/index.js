@@ -54,7 +54,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
   }
 
   handleViewCandidateProfile(offer) {
-    this.props.history.push(`/profile/${offer.candidate.id}`);
+    this.props.history.push(`/user/${offer.candidate.id}`);
   }
 
   handleOnConfirm() {

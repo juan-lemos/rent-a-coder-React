@@ -24,6 +24,7 @@ import RegisterPage from 'containers/RegisterPage';
 import PublishProjectPage from 'containers/PublishProjectPage';
 import CandidatesPage from 'containers/CandidatesPage';
 import ModifyProjectPage from 'containers/ModifyProjectPage';
+import UserPage from 'containers/UserPage';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/publishProject" component={PublishProjectPage} />
         <Route path="/candidates/:proyX" component={CandidatesPage} />
         <Route path="/projectEdit/:proyX" component={ModifyProjectPage} />
+        <Route path="/user/:userX" component={UserPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div >

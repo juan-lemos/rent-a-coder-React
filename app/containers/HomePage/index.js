@@ -11,6 +11,8 @@ import OfferModal from 'components/HomeComponents/OfferModal';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
+import RedirectNoLogged from 'components/RedirectNoLogged';
+
 
 import reducer from './reducer';
 import saga from './saga';
@@ -51,6 +53,14 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       this.setState({ showModalOffer: false, errorsInFields: { cost: false, estimated_time: false } });
       this.props.cleanOffer();
       this.props.onGetProjects();
+    } else if (nextProps.offerError == null) {
+      this.setState({ errorsInFields: { cost: false, estimated_time: false } });
+    }
+    if (nextProps.projectsError !== null) {
+      if (nextProps.projectsError.errors !== undefined
+        && nextProps.projectsError.errors[0] !== undefined) {
+        this.props.history.push('/login');
+      }
     }
   }
 
@@ -60,11 +70,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       let property;
       const properties = this.state.errorsInFields;
       for (property in properties) {// eslint-disable-line 
-        properties[property].error = false;
+        properties[property] = false;
       }
       for (propertyName in nextProps.offerError.errors) {// eslint-disable-line 
         if (properties[propertyName] !== undefined) {
-          properties[propertyName].error = true;
+          properties[propertyName] = true;
         }
       }
     }
@@ -83,7 +93,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       offerToSend.project_id = this.state.selectedProjectOffer.id;
       this.props.onOffer(offerToSend);
     } else {
-      this.setState({ showModalOffer: false });
+      this.setState({
+        showModalOffer: false,
+      });
+      this.props.cleanOffer();
     }
   }
 
@@ -91,7 +104,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     let renderList;
     if (this.props.projectsLoading) {
       renderList = <LoadingIndicator />;
-    } else if (this.props.projectsError) {
+    } else if (this.props.projectsError !== null) {
       renderList = <div>Error Loading</div>;
     } else if (this.props.projectsResponse != null) {
       renderList = (
@@ -107,21 +120,17 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <title>Home</title>
           <meta name="description" content="Description of Home" />
         </Helmet>
-        <h1>{'Proyectos sin ofertar:'}</h1>
-        {this.props.offerLoading ?
-          <LoadingIndicator /> :
-          (<div>
-            {renderList}
-            <OfferModal
-              show={this.state.showModalOffer}
-              errorsInFields={this.state.errorsInFields}
-              handleClose={(offer) => this.handleCloseModal(offer)}
-              projectName={this.state.selectedProjectOffer.name}
-            />
-          </div>
-          )
-        }
-      </Grid>
+        <h1>{'Proyectos sin ofertar'}</h1>
+        <div>
+          {renderList}
+          <OfferModal
+            show={this.state.showModalOffer}
+            errorsInFields={this.state.errorsInFields}
+            handleClose={(offer) => this.handleCloseModal(offer)}
+            projectName={this.state.selectedProjectOffer.name}
+          />
+        </div>
+      </Grid >
     );
   }
 }
@@ -129,12 +138,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 HomePage.propTypes = {
   projectsResponse: PropTypes.object,
   projectsLoading: PropTypes.bool,
-  projectsError: PropTypes.bool,
+  projectsError: PropTypes.object,
   onGetProjects: PropTypes.func,
   onOffer: PropTypes.func,
-  offerLoading: PropTypes.bool,
   offerResponse: PropTypes.object,
   cleanOffer: PropTypes.func,
+  history: PropTypes.object,
+  offerError: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -165,8 +175,8 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'homePage', reducer });
 const withSaga = injectSaga({ key: 'homePage', saga });
 
-export default compose(
+export default RedirectNoLogged(compose(
   withReducer,
   withSaga,
   withConnect,
-)(HomePage);
+)(HomePage));

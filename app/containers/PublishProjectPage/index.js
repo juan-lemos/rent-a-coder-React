@@ -12,6 +12,7 @@ import moment from 'moment';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import LoadingIndicator from 'components/common/LoadingIndicator';
+import RedirectNoLogged from 'components/RedirectNoLogged';
 
 import {
   makeSelectTechnologies,
@@ -145,6 +146,7 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
           <meta name="description" content="Description of PublishProjectPage" />
         </Helmet>
         <Container>
+          <h1>{'Crear un proyecto'}</h1>
           {renderBody}
         </Container>
       </div>
@@ -192,8 +194,8 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 const withReducer = injectReducer({ key: 'publishProjectPage', reducer });
 const withSaga = injectSaga({ key: 'publishProjectPage', saga });
 
-export default compose(
+export default RedirectNoLogged(compose(
   withReducer,
   withSaga,
   withConnect,
-)(PublishProjectPage);
+)(PublishProjectPage));

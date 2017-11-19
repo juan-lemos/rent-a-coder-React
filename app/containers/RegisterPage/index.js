@@ -64,7 +64,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       country: '',
       tel: '',
       web: '',
-      technologies: [],
+      technologies_ids: [],
     };
   }
 
@@ -102,9 +102,11 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     this.props.onCreate({ ...this.values });
   }
 
-  handleSelectedTechnologies(val) {
-    this.setState({ selectedTechnologies: val });
-    this.values.technologies = val;
+  handleSelectedTechnologies(vals) {
+    this.setState({ selectedTechnologies: vals });
+    const techs = [];
+    vals.map((val) => (techs.push(val.value)));
+    this.values.technologies_ids = techs;
   }
 
   render() {
@@ -116,7 +118,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
         <RegisterContainer>
-          <h1>{'Registro:'}</h1>
+          <h1>{'Registro'}</h1>
           <Form
             formFields={this.state.formFields}
             handleCreateOnClick={() => this.handleCreateOnClick()}

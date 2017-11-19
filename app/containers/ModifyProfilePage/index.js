@@ -98,8 +98,10 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
         tel: nextProps.profileResponse.user.tel,
         web: nextProps.profileResponse.user.web,
         technologies: [],
-        // technologies: nextProps.profileResponse.user.technologies,
       };
+      nextProps.profileResponse.user.technologies.forEach((item) =>
+        values.technologies.push({ value: item.id, label: item.name })
+      );
       this.setState({ values });
       this.isFirstTime = true;
     }
@@ -137,12 +139,18 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
   }
 
   handleModifyOnClick() {
-    if (this.state.values.password === '' ||
-      (this.state.values.password === '' && this.state.values.password_confirmation === '')) {
-      delete this.state.values.password;
-      delete this.state.values.password_confirmation;
+    const valuesToSend = Object.assign({}, this.state.values);
+    if (valuesToSend.password === '' ||
+      (valuesToSend.password === '' && valuesToSend.password_confirmation === '')) {
+      delete valuesToSend.password;
+      delete valuesToSend.password_confirmation;
     }
-    this.props.onModifyProfile({ ...this.state.values });
+    valuesToSend.technologies_ids = [];
+    valuesToSend.technologies.forEach((item) =>
+      valuesToSend.technologies_ids.push(item.value)
+    );
+    delete valuesToSend.technologies;
+    this.props.onModifyProfile({ ...valuesToSend });
   }
 
   handleSelectedTechnologies(val) {
@@ -161,7 +169,7 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
       renderFields = (
         <ModifyForm
           formFields={this.state.formFields}
-          handleCreateOnClick={() => this.handleModifyOnClick()}
+          handleModifyOnClick={() => this.handleModifyOnClick()}
           handleFieldChange={(event) => this.handleFieldChange(event)}
           handleSelectedTechnologies={(values) => this.handleSelectedTechnologies(values)}
           technologies={this.props.technologiesResponse}
@@ -178,6 +186,7 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
           <meta name="description" content="Description of ModifyProfilePage" />
         </Helmet>
         <Container>
+          <h1>{'Editar perfil'}</h1>
           {renderFields}
         </Container>
       </div>

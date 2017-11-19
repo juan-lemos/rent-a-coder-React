@@ -54,7 +54,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
   }
 
   handleViewCandidateProfile(offer) {
-    console.log(offer.candidate.id);
+    this.props.history.push(`/profile/${offer.candidate.id}`);
   }
 
   handleOnConfirm() {
@@ -111,7 +111,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
           <title>CandidatesPage</title>
           <meta name="description" content="Description of CandidatesPage" />
         </Helmet>
-        <h1>{'Candidatos:'}</h1>
+        <h1>{'Candidatos'}</h1>
         {render}
       </Grid>
     );

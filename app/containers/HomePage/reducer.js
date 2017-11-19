@@ -11,7 +11,7 @@ import {
 
 const initialState = fromJS({
   loadingProjects: false,
-  errorProjects: false,
+  errorProjects: null,
   responseProjects: null,
   loadingPutOffer: false,
   errorPutOffer: null,
@@ -23,7 +23,7 @@ function homePageReducer(state = initialState, action) {
     case GET_PROJECTS:
       return state
         .set('loadingProjects', true)
-        .set('errorProjects', false)
+        .set('errorProjects', null)
         .set('responseProjects', null);
     case GET_PROJECTS_SUCCESS:
       return state
@@ -32,7 +32,7 @@ function homePageReducer(state = initialState, action) {
     case GET_PROJECTS_ERROR:
       return state
         .set('loadingProjects', false)
-        .set('errorProjects', true);
+        .set('errorProjects', action.error);
     case PUT_OFFER:
       return state
         .set('loadingPutOffer', true)

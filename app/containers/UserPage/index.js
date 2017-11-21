@@ -9,26 +9,15 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import ProfileInfo from 'components/ProfileComponents/ProfileInfo';
 import ProjectsTab from 'components/ProfileComponents/ProjectsTab';
-import RedirectNoLogged from 'components/RedirectNoLogged';
-import { profile } from './actions';
-import { makeSelectUserData, makeSelectProfileError } from './selectors';
+import { user } from './actions';
+import { makeSelectUserData, makeSelectUserError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import './index.css';
 
-
-export class ProfilePage extends React.PureComponent {
-
-  componentWillMount() {
-    this.props.onCreate({ ...this.values });
-  }
-
-  handleClickEditProject(projectId) {
-    this.props.history.push(`/projectEdit/${projectId}`);
-  }
-
-  handleClickAssignProject(projectId) {
-    this.props.history.push(`/candidates/${projectId}`);
+export class UserPage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.props.onGetUser(this.props.match.params.userX);
   }
 
   render() {
@@ -36,8 +25,7 @@ export class ProfilePage extends React.PureComponent {
       developer_score: developerScore,
       owner_score: ownerScore,
       gravatar_url: gravatarURL,
-      uploaded_projects: uploadedProjects,
-      projects_as_candidate: projectsAsCandidate,
+      projects_done: projectsDone,
       city,
       country,
       email,
@@ -64,15 +52,7 @@ export class ProfilePage extends React.PureComponent {
           />
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">
-              <ProjectsTab
-                eventKey={1}
-                title="Publicados"
-                projects={uploadedProjects}
-                handleClickEditProject={(projectId) => this.handleClickEditProject(projectId)}
-                handleClickAssignProject={(projectId) => this.handleClickAssignProject(projectId)}
-                editable
-              />
-              <ProjectsTab eventKey={2} title="Postulados" projects={projectsAsCandidate} editable={false} />
+              <ProjectsTab eventKey={1} title="Proyectos Realizados" projects={projectsDone} editable={false} />
             </Tabs>
           </Col>
         </Row>
@@ -81,33 +61,32 @@ export class ProfilePage extends React.PureComponent {
   }
 }
 
-ProfilePage.propTypes = {
-  onCreate: PropTypes.func.isRequired,
+UserPage.propTypes = {
+  match: PropTypes.object,
+  onGetUser: PropTypes.func,
   userData: PropTypes.object,
-  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   userData: makeSelectUserData(),
-  profileError: makeSelectProfileError(),
+  userError: makeSelectUserError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onCreate: (evt) => {
-      dispatch(profile(evt));
+    onGetUser: (userId) => {
+      dispatch(user(userId));
     },
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'profilePage', reducer });
-const withSaga = injectSaga({ key: 'profilePage', saga });
+const withReducer = injectReducer({ key: 'userPage', reducer });
+const withSaga = injectSaga({ key: 'userPage', saga });
 
-export default RedirectNoLogged(compose(
+export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(ProfilePage));
-
+)(UserPage);

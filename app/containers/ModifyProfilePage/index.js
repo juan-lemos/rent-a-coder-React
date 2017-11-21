@@ -56,10 +56,6 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
     this.state = {
       formFields: {
         name: fieldObj(false, 'Nombre', 'input'),
-        nickname: fieldObj(false, 'Nombre de usuario', 'input'),
-        email: fieldObj(false, 'Email', 'input'),
-        password: fieldObj(false, 'Contraseña', 'password'),
-        password_confirmation: fieldObj(false, 'Repita contraseña', 'password'),
         city: fieldObj(false, 'Ciudad', 'input'),
         country: fieldObj(false, 'País', 'input'),
         tel: fieldObj(false, 'Tel.', 'input'),

@@ -45,6 +45,7 @@ export class ProfilePage extends React.PureComponent {
       nickname,
       tel,
       web,
+      technologies,
     } = this.props.userData;
 
     return (
@@ -61,6 +62,7 @@ export class ProfilePage extends React.PureComponent {
             website={web}
             city={city}
             country={country}
+            technologies={technologies}
             editable
           />
           <Col sm={12} md={9} lg={9}>

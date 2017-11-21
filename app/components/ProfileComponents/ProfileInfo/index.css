@@ -6,6 +6,21 @@
   margin-top: 25px;
 }
 
+.user-edit-button {
+  margin-top: 15px;
+}
+
+.user-edit-text {
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(51, 51, 51);
+}
+
+.user-edit:hover {
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+}
+
 .user-name {
   margin-bottom: 2px;
 }

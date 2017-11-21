@@ -61,6 +61,7 @@ export class ProfilePage extends React.PureComponent {
             website={web}
             city={city}
             country={country}
+            editable
           />
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">
@@ -110,4 +111,3 @@ export default RedirectNoLogged(compose(
   withSaga,
   withConnect,
 )(ProfilePage));
-

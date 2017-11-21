@@ -49,6 +49,7 @@ export class UserPage extends React.PureComponent {
             website={web}
             city={city}
             country={country}
+            editable={false}
           />
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">

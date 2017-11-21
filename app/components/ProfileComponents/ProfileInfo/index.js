@@ -1,5 +1,6 @@
 import React from 'react';
-import { Row, Col, Image, Glyphicon } from 'react-bootstrap';
+import { Row, Col, Image, Glyphicon, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ReactStars from 'react-stars';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
@@ -7,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import './index.css';
 
-function ProfileInfo({ name, username, gravatarURL, contractorRating, hiredRating, email, phone, website, city, country }) {
+function ProfileInfo({ name, username, gravatarURL, contractorRating, hiredRating, email, phone, website, city, country, editable }) {
   return (
     <Col sm={12} md={3} lg={3}>
       <Row>
@@ -20,6 +21,15 @@ function ProfileInfo({ name, username, gravatarURL, contractorRating, hiredRatin
       <Row>
         <Col sm={12} md={12} lg={12}>
           <div className="user-info text-center">
+            {editable ? (
+              <div>
+                <Button bsSize="xsmall" className="user-edit-button">
+                  <Link to="/profileEdit" className="user-edit-text"><Glyphicon glyph="pencil" /> Editar </Link>
+                </Button>
+              </div>
+            ) : (
+              ''
+            )}
             <div>
               <h1 className="user-name">{name}</h1>
               <span className="lead text-left">@{username}</span>
@@ -54,6 +64,7 @@ ProfileInfo.propTypes = {
   website: PropTypes.string,
   city: PropTypes.string,
   country: PropTypes.string,
+  editable: PropTypes.bool,
 };
 
 export default ProfileInfo;

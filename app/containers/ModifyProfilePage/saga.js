@@ -34,7 +34,7 @@ export function* profileGet() {
 }
 
 export function* modificationProfilePut(action) {
-  const registerReference = 'https://rent-a-coder-api.herokuapp.com/auth';
+  const modificationReference = 'https://rent-a-coder-api.herokuapp.com/users';
   const requestHeaders = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
@@ -43,7 +43,7 @@ export function* modificationProfilePut(action) {
   requestHeaders[SESSION_CLIENT] = getSessionClient();
   requestHeaders[SESSION_UID] = getSessionUid();
   try {
-    const response = yield call(requestWithHeaders, registerReference, {
+    const response = yield call(requestWithHeaders, modificationReference, {
       method: 'PATCH',
       headers: requestHeaders,
       body: JSON.stringify({
@@ -64,4 +64,3 @@ export default function* rootSaga() {
     takeLatest(POST_MODIFICATION, modificationProfilePut),
   ]);
 }
-

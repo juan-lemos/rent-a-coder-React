@@ -11,13 +11,20 @@ function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handle
     danger: 'finished',
   };
 
+  const stateDescriptions = {
+    open: 'abierto',
+    offered: 'ofertado',
+    in_progress: 'en progreso',
+    danger: 'finalizado',
+  };
+
   let projectElements;
   if (projects) {
     projectElements = projects.map((project) => {
       const projectHeader = (
         <div className="project-header">
           <h5>{project.name}</h5>
-          <Label bsStyle={stateClasses[project.state]}>{project.state}</Label>
+          <Label bsStyle={stateClasses[project.state]}>{stateDescriptions[project.state]}</Label>
         </div>
       );
 

@@ -10,7 +10,8 @@ import injectReducer from 'utils/injectReducer';
 import ProfileInfo from 'components/ProfileComponents/ProfileInfo';
 import ProjectsTab from 'components/ProfileComponents/ProjectsTab';
 import RedirectNoLogged from 'components/RedirectNoLogged';
-import { profile } from './actions';
+import RatingModal from 'components/ProfileComponents/RatingModal';
+import { profile, putProjectRate } from './actions';
 import { makeSelectUserData, makeSelectProfileError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -18,6 +19,14 @@ import './index.css';
 
 
 export class ProfilePage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+      selectedProjectId: null,
+      projectRating: 4,
+    };
+  }
 
   componentWillMount() {
     this.props.onCreate({ ...this.values });
@@ -29,6 +38,25 @@ export class ProfilePage extends React.PureComponent {
 
   handleClickAssignProject(projectId) {
     this.props.history.push(`/candidates/${projectId}`);
+  }
+
+  handleClickRateProject(projectId) {
+    this.setState({ showModal: true, selectedProjectId: projectId });
+  }
+
+  handleOnRateChange(rating) {
+    this.setState({ projectRating: rating });
+  }
+
+  handleOnRateConfirm() {
+    this.props.onProjectRateConfirm({
+      developerScore: this.state.projectRating,
+      projectId: this.state.selectedProjectId,
+    });
+    this.setState({
+      showModal: false,
+      projectRating: 0,
+    });
   }
 
   render() {
@@ -47,6 +75,18 @@ export class ProfilePage extends React.PureComponent {
       web,
       technologies,
     } = this.props.userData;
+
+    let renderModal;
+    if (this.state.showModal) {
+      renderModal =
+        (<RatingModal
+          onCancel={() => this.setState({ showModal: false })}
+          onConfirm={() => this.handleOnRateConfirm()}
+          onRatingChange={(rating) => this.handleOnRateChange(rating)}
+        />);
+    } else {
+      renderModal = null;
+    }
 
     return (
       <Grid>
@@ -67,12 +107,14 @@ export class ProfilePage extends React.PureComponent {
           />
           <Col sm={12} md={9} lg={9}>
             <Tabs defaultActiveKey={1} id="projects-tabs">
+              {renderModal}
               <ProjectsTab
                 eventKey={1}
                 title="Publicados"
                 projects={uploadedProjects}
                 handleClickEditProject={(projectId) => this.handleClickEditProject(projectId)}
                 handleClickAssignProject={(projectId) => this.handleClickAssignProject(projectId)}
+                handleClickRateProject={(projectId) => this.handleClickRateProject(projectId)}
                 editable
               />
               <ProjectsTab eventKey={2} title="Postulados" projects={projectsAsCandidate} editable={false} />
@@ -88,6 +130,7 @@ ProfilePage.propTypes = {
   onCreate: PropTypes.func.isRequired,
   userData: PropTypes.object,
   history: PropTypes.object,
+  onProjectRateConfirm: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -99,6 +142,9 @@ function mapDispatchToProps(dispatch) {
   return {
     onCreate: (evt) => {
       dispatch(profile(evt));
+    },
+    onProjectRateConfirm: (evt) => {
+      dispatch(putProjectRate(evt));
     },
   };
 }

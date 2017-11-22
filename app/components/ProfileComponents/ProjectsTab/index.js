@@ -3,19 +3,19 @@ import { Row, Col, Tab, Accordion, Panel, Label, Button } from 'react-bootstrap'
 import PropTypes from 'prop-types';
 import './index.css';
 
-function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handleClickAssignProject, editable }) {
+function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handleClickAssignProject, handleClickRateProject, editable }) {
   const stateClasses = {
     open: 'success',
     offered: 'warning',
     in_progress: 'primary',
-    danger: 'finished',
+    finished: 'danger',
   };
 
   const stateDescriptions = {
     open: 'abierto',
     offered: 'ofertado',
     in_progress: 'en progreso',
-    danger: 'finalizado',
+    finished: 'finalizado',
   };
 
   let projectElements;
@@ -51,7 +51,7 @@ function ProjectsTab({ eventKey, title, projects, handleClickEditProject, handle
           projectButton = <Button bsStyle="primary" onClick={() => handleClickAssignProject(project.id)} block>Asignar</Button>;
           break;
         case 'in_progress':
-          projectButton = <Button bsStyle="danger" onClick={() => handleClickEditProject(project.id)} block>Finalizar</Button>;
+          projectButton = <Button bsStyle="danger" onClick={() => handleClickRateProject(project.id)} block>Finalizar</Button>;
           break;
         default:
           projectButton = '';
@@ -105,6 +105,7 @@ ProjectsTab.propTypes = {
   projects: PropTypes.array,
   handleClickEditProject: PropTypes.func,
   handleClickAssignProject: PropTypes.func,
+  handleClickRateProject: PropTypes.func,
   editable: PropTypes.bool,
 };
 

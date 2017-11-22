@@ -10,7 +10,7 @@ import './index.css';
 
 function ProfileInfo({ name, username, gravatarURL, contractorRating, hiredRating, email, phone, website, city, country, technologies, editable }) {
   let userTecnologies;
-  if (technologies.length !== 0) {
+  if (technologies && technologies.length !== 0) {
     userTecnologies = technologies.map((element, i) => {
       const keyTag = `tag${i}`;
       return (
@@ -42,7 +42,7 @@ function ProfileInfo({ name, username, gravatarURL, contractorRating, hiredRatin
                 </Button>
               </div>
             ) : (
-              'Sin especificar'
+              ''
             )}
             <div>
               <h1 className="user-name">{name}</h1>

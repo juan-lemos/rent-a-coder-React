@@ -158,7 +158,7 @@ export class ModifyProjectPage extends React.PureComponent { // eslint-disable-l
     return (
       <div>
         <Helmet>
-          <title>ModifyProjectPage</title>
+          <title>Modificar Proyecto</title>
           <meta name="description" content="Description of ModifyProjectPage" />
         </Helmet>
         <Container>

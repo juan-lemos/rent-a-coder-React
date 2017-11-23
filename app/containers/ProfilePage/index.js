@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Helmet } from 'react-helmet';
 import { Tabs, Row, Col, Grid } from 'react-bootstrap';
 
 import injectSaga from 'utils/injectSaga';
@@ -110,6 +111,10 @@ export class ProfilePage extends React.PureComponent {
 
     return (
       <Grid>
+        <Helmet>
+          <title>Perfil</title>
+          <meta name="description" content="Description of CandidatesPage" />
+        </Helmet>
         <Row>
           <ProfileInfo
             name={name}

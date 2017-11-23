@@ -114,7 +114,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     return (
       <div>
         <Helmet>
-          <title>Register</title>
+          <title>Registro</title>
           <meta name="description" content="Description of RegisterPage" />
         </Helmet>
         <RegisterContainer>

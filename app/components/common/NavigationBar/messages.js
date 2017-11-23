@@ -12,7 +12,7 @@ export default defineMessages({
   },
   profile: {
     id: 'app.components.common.NavigationBar.profile',
-    defaultMessage: 'Profile',
+    defaultMessage: 'Perfil',
   },
   login: {
     id: 'app.components.common.NavigationBar.login',
@@ -24,6 +24,6 @@ export default defineMessages({
   },
   publish: {
     id: 'app.components.common.NavigationBar.publish',
-    defaultMessage: 'Publish',
+    defaultMessage: 'Publicar',
   },
 });

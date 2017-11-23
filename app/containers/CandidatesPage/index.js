@@ -108,7 +108,7 @@ export class CandidatesPage extends React.PureComponent { // eslint-disable-line
     return (
       <Grid>
         <Helmet>
-          <title>CandidatesPage</title>
+          <title>Candidatos</title>
           <meta name="description" content="Description of CandidatesPage" />
         </Helmet>
         <h1>{'Candidatos'}</h1>

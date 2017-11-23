@@ -142,7 +142,7 @@ export class PublishProjectPage extends React.PureComponent { // eslint-disable-
     return (
       <div>
         <Helmet>
-          <title>PublishProjectPage</title>
+          <title>Publicar projecto</title>
           <meta name="description" content="Description of PublishProjectPage" />
         </Helmet>
         <Container>

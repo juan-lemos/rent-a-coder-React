@@ -53,7 +53,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     return (
       <div>
         <Helmet>
-          <title>LoginPage</title>
+          <title>Login</title>
           <meta name="description" content="Description of LoginPage" />
         </Helmet>
         <div style={{ maxWidth: '300px', margin: 'auto' }}>

@@ -178,7 +178,7 @@ export class ModifyProfilePage extends React.PureComponent { // eslint-disable-l
     return (
       <div>
         <Helmet>
-          <title>ModifyProfilePage</title>
+          <title>Modificar Perfil</title>
           <meta name="description" content="Description of ModifyProfilePage" />
         </Helmet>
         <Container>

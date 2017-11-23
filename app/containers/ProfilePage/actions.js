@@ -2,9 +2,12 @@ import {
   PROFILE,
   PROFILE_SUCCESS,
   PROFILE_ERROR,
-  PUT_PROJECT_RATE,
-  PUT_PROJECT_RATE_SUCCESS,
-  PUT_PROJECT_RATE_ERROR,
+  PUT_OWNED_PROJECT_RATE,
+  PUT_OWNED_PROJECT_RATE_SUCCESS,
+  PUT_OWNED_PROJECT_RATE_ERROR,
+  PUT_DEVELOPED_PROJECT_RATE,
+  PUT_DEVELOPED_PROJECT_RATE_SUCCESS,
+  PUT_DEVELOPED_PROJECT_RATE_ERROR,
 } from './constants';
 
 export function profile(content) {
@@ -29,23 +32,44 @@ export function profileError(error) {
 }
 
 
-export function putProjectRate(content) {
+export function putOwnedProjectRate(content) {
   return {
-    type: PUT_PROJECT_RATE,
+    type: PUT_OWNED_PROJECT_RATE,
     content,
   };
 }
 
-export function putProjectRateLoaded(content) {
+export function putOwnedProjectRateLoaded(content) {
   return {
-    type: PUT_PROJECT_RATE_SUCCESS,
+    type: PUT_OWNED_PROJECT_RATE_SUCCESS,
     content,
   };
 }
 
-export function putProjectRateError(error) {
+export function putOwnedProjectRateError(error) {
   return {
-    type: PUT_PROJECT_RATE_ERROR,
+    type: PUT_OWNED_PROJECT_RATE_ERROR,
+    error,
+  };
+}
+
+export function putDevelopedProjectRate(content) {
+  return {
+    type: PUT_DEVELOPED_PROJECT_RATE,
+    content,
+  };
+}
+
+export function putDevelopedProjectRateLoaded(content) {
+  return {
+    type: PUT_DEVELOPED_PROJECT_RATE_SUCCESS,
+    content,
+  };
+}
+
+export function putDevelopedProjectRateError(error) {
+  return {
+    type: PUT_DEVELOPED_PROJECT_RATE_ERROR,
     error,
   };
 }

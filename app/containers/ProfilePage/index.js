@@ -11,7 +11,7 @@ import ProfileInfo from 'components/ProfileComponents/ProfileInfo';
 import ProjectsTab from 'components/ProfileComponents/ProjectsTab';
 import RedirectNoLogged from 'components/RedirectNoLogged';
 import RatingModal from 'components/ProfileComponents/RatingModal';
-import { profile, putProjectRate } from './actions';
+import { profile, putOwnedProjectRate, putDevelopedProjectRate } from './actions';
 import { makeSelectUserData, makeSelectProfileError } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -24,7 +24,8 @@ export class ProfilePage extends React.PureComponent {
     this.state = {
       showModal: false,
       selectedProjectId: null,
-      projectRating: 4,
+      projectRating: 0,
+      ratingAsOwner: null,
     };
   }
 
@@ -40,8 +41,8 @@ export class ProfilePage extends React.PureComponent {
     this.props.history.push(`/candidates/${projectId}`);
   }
 
-  handleClickRateProject(projectId) {
-    this.setState({ showModal: true, selectedProjectId: projectId });
+  handleClickRateProject(projectId, ratingAsOwner) {
+    this.setState({ showModal: true, selectedProjectId: projectId, ratingAsOwner });
   }
 
   handleOnRateChange(rating) {
@@ -49,13 +50,22 @@ export class ProfilePage extends React.PureComponent {
   }
 
   handleOnRateConfirm() {
-    this.props.onProjectRateConfirm({
-      developerScore: this.state.projectRating,
-      projectId: this.state.selectedProjectId,
-    });
+    if (this.state.ratingAsOwner) {
+      this.props.onOwnedProjectRateConfirm({
+        developerScore: this.state.projectRating,
+        projectId: this.state.selectedProjectId,
+      });
+    } else {
+      this.props.onDevelopedProjectRateConfirm({
+        ownerScore: this.state.projectRating,
+        projectId: this.state.selectedProjectId,
+      });
+    }
+
     this.setState({
       showModal: false,
       projectRating: 0,
+      ratingAsOwner: null,
     });
   }
 
@@ -114,10 +124,16 @@ export class ProfilePage extends React.PureComponent {
                 projects={uploadedProjects}
                 handleClickEditProject={(projectId) => this.handleClickEditProject(projectId)}
                 handleClickAssignProject={(projectId) => this.handleClickAssignProject(projectId)}
-                handleClickRateProject={(projectId) => this.handleClickRateProject(projectId)}
-                editable
+                handleClickRateProject={(projectId) => this.handleClickRateProject(projectId, true)}
+                access="owner"
               />
-              <ProjectsTab eventKey={2} title="Postulados" projects={projectsAsCandidate} editable={false} />
+              <ProjectsTab
+                eventKey={2}
+                title="Postulados"
+                projects={projectsAsCandidate}
+                access="developer"
+                handleClickRateProject={(projectId) => this.handleClickRateProject(projectId, false)}
+              />
             </Tabs>
           </Col>
         </Row>
@@ -130,7 +146,8 @@ ProfilePage.propTypes = {
   onCreate: PropTypes.func.isRequired,
   userData: PropTypes.object,
   history: PropTypes.object,
-  onProjectRateConfirm: PropTypes.func,
+  onOwnedProjectRateConfirm: PropTypes.func,
+  onDevelopedProjectRateConfirm: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -143,8 +160,11 @@ function mapDispatchToProps(dispatch) {
     onCreate: (evt) => {
       dispatch(profile(evt));
     },
-    onProjectRateConfirm: (evt) => {
-      dispatch(putProjectRate(evt));
+    onOwnedProjectRateConfirm: (evt) => {
+      dispatch(putOwnedProjectRate(evt));
+    },
+    onDevelopedProjectRateConfirm: (evt) => {
+      dispatch(putDevelopedProjectRate(evt));
     },
   };
 }

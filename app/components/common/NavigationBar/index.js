@@ -42,13 +42,15 @@ export class NavigationBar extends React.PureComponent {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
-            <LinkContainer to="/publishProject">
-              <NavItem eventKey={1}>
-                <FormattedMessage {...messages.publish} />
-              </NavItem>
-            </LinkContainer>
-          </Nav>
+          {path !== '/login' &&
+            <Nav>
+              <LinkContainer to="/publishProject">
+                <NavItem eventKey={1}>
+                  <FormattedMessage {...messages.publish} />
+                </NavItem>
+              </LinkContainer>
+            </Nav>
+          }
           <Nav pullRight>
             <NavItem
               eventKey={2}
@@ -57,11 +59,12 @@ export class NavigationBar extends React.PureComponent {
             >
               {this.chooseMessage()}
             </NavItem>
-            <LinkContainer to="/profile">
-              <NavItem eventKey={3}>
-                <FormattedMessage {...messages.profile} />
-              </NavItem>
-            </LinkContainer>
+            {path !== '/login' &&
+              <LinkContainer to="/profile">
+                <NavItem eventKey={3}>
+                  <FormattedMessage {...messages.profile} />
+                </NavItem>
+              </LinkContainer>}
           </Nav>
         </Navbar.Collapse>
       </Navbar >

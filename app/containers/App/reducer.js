@@ -12,7 +12,7 @@ const initialState = fromJS({
   responseTechnologies: null,
 });
 
-const modifiedContent = [];
+let modifiedContent = [];
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
@@ -22,6 +22,7 @@ function appReducer(state = initialState, action) {
         .set('errorTechnologies', false)
         .set('responseTechnologies', null);
     case GET_TECHNOLOGIES_SUCCESS:
+      modifiedContent = [];
       action.content.technologies.forEach((element) => {
         modifiedContent.push({ value: element.id, label: element.name });
       }

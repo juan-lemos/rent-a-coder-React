@@ -15,12 +15,16 @@ import messages from './messages';
 export class NavigationBar extends React.PureComponent {
 
   chooseMessage() {
-    if (getSessionToken() == null || getSessionToken() === 'null') {
+    if (this.isNotLogged()) {
       return <FormattedMessage {...messages.login} />;
     }
     return (
       <FormattedMessage {...messages.logout} />
     );
+  }
+
+  isNotLogged() {
+    return getSessionToken() == null || getSessionToken() === 'null';
   }
 
   resetVariablesLoginAndMoveLogin() {
@@ -42,7 +46,7 @@ export class NavigationBar extends React.PureComponent {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          {path !== '/login' &&
+          {!this.isNotLogged() &&
             <Nav>
               <LinkContainer to="/publishProject">
                 <NavItem eventKey={1}>
@@ -59,7 +63,7 @@ export class NavigationBar extends React.PureComponent {
             >
               {this.chooseMessage()}
             </NavItem>
-            {path !== '/login' &&
+            {!this.isNotLogged() &&
               <LinkContainer to="/profile">
                 <NavItem eventKey={3}>
                   <FormattedMessage {...messages.profile} />

@@ -12,7 +12,13 @@ const makeSelectProfileError = () =>
     substate.get('errorProfile')
   );
 
+const makeSelectLoadingPut = () =>
+  createSelector(selectProfilePageDomain, (substate) =>
+    substate.get('loadingPut')
+  );
+
 export {
   makeSelectUserData,
   makeSelectProfileError,
+  makeSelectLoadingPut,
 };

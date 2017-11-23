@@ -12,7 +12,7 @@ import ProjectsTab from 'components/ProfileComponents/ProjectsTab';
 import RedirectNoLogged from 'components/RedirectNoLogged';
 import RatingModal from 'components/ProfileComponents/RatingModal';
 import { profile, putOwnedProjectRate, putDevelopedProjectRate } from './actions';
-import { makeSelectUserData, makeSelectProfileError } from './selectors';
+import { makeSelectUserData, makeSelectProfileError, makeSelectLoadingPut } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import './index.css';
@@ -27,10 +27,18 @@ export class ProfilePage extends React.PureComponent {
       projectRating: 0,
       ratingAsOwner: null,
     };
+    this.waitingPutResponse = false;
   }
 
   componentWillMount() {
-    this.props.onCreate({ ...this.values });
+    this.props.getProfile();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.loadingPut && this.waitingPutResponse) {
+      this.waitingPutResponse = false;
+      this.props.getProfile();
+    }
   }
 
   handleClickEditProject(projectId) {
@@ -67,6 +75,8 @@ export class ProfilePage extends React.PureComponent {
       projectRating: 0,
       ratingAsOwner: null,
     });
+
+    this.waitingPutResponse = true;
   }
 
   render() {
@@ -143,21 +153,23 @@ export class ProfilePage extends React.PureComponent {
 }
 
 ProfilePage.propTypes = {
-  onCreate: PropTypes.func.isRequired,
+  getProfile: PropTypes.func.isRequired,
   userData: PropTypes.object,
   history: PropTypes.object,
   onOwnedProjectRateConfirm: PropTypes.func,
   onDevelopedProjectRateConfirm: PropTypes.func,
+  loadingPut: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userData: makeSelectUserData(),
   profileError: makeSelectProfileError(),
+  loadingPut: makeSelectLoadingPut(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    onCreate: (evt) => {
+    getProfile: (evt) => {
       dispatch(profile(evt));
     },
     onOwnedProjectRateConfirm: (evt) => {

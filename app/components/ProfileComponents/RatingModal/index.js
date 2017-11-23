@@ -12,7 +12,7 @@ function RatingModal({ onCancel, onConfirm, onRatingChange }) {
       <Modal.Body>
         <Row>
           <Col lg={12} md={12} sm={12}>
-            <ReactStars count={5} size={40} onChange={(rating) => onRatingChange(rating)} />
+            <ReactStars count={5} size={40} half={false} onChange={(rating) => onRatingChange(rating)} />
           </Col>
         </Row>
       </Modal.Body>
